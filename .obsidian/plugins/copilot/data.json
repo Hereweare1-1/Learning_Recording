@@ -32,7 +32,7 @@
   "autosaveChat": true,
   "autoAddActiveContentToContext": true,
   "defaultOpenArea": "view",
-  "defaultSendShortcut": "enter",
+  "defaultSendShortcut": "shift+enter",
   "customPromptsFolder": "copilot/copilot-custom-prompts",
   "qaExclusions": "copilot",
   "qaInclusions": "",
@@ -369,14 +369,109 @@
     "debugFullFrames": true,
     "notificationSound": true,
     "notificationSoundId": "piano",
-    "welcomeDismissed": false,
+    "welcomeDismissed": true,
     "skills": {
       "folder": "copilot/skills"
+    },
+    "deviceProfiles": {
+      "9e30f6c8-e49a-4125-9708-d7b51bda64b9": {
+        "opencode": {
+          "probeSessionId": "ses_f8e214b1fffejpvURaA4oOpK1g"
+        }
+      }
     }
   },
-  "providers": {},
-  "configuredModels": [],
-  "backends": {},
+  "providers": {
+    "42883153-5f9a-459b-8760-9adf930486c1": {
+      "providerType": "openai-compatible",
+      "displayName": "opencode",
+      "origin": {
+        "kind": "agent",
+        "agentType": "opencode"
+      },
+      "requiresApiKey": false,
+      "providerId": "42883153-5f9a-459b-8760-9adf930486c1",
+      "addedAt": 1788616815903,
+      "apiKeyKeychainId": null
+    }
+  },
+  "configuredModels": [
+    {
+      "providerId": "42883153-5f9a-459b-8760-9adf930486c1",
+      "info": {
+        "id": "opencode/big-pickle",
+        "displayName": "OpenCode Zen/Big Pickle"
+      },
+      "configuredModelId": "805bad06-2c2c-45b6-b866-4e17dd7333c4",
+      "configuredAt": 1788616815907
+    },
+    {
+      "providerId": "42883153-5f9a-459b-8760-9adf930486c1",
+      "info": {
+        "id": "opencode/ling-3.0-flash-fin-free",
+        "displayName": "OpenCode Zen/Ling 3.0 Flash Fin Free"
+      },
+      "configuredModelId": "03c432f4-1913-47ee-bec4-d4ae1fc2d02c",
+      "configuredAt": 1788616815908
+    },
+    {
+      "providerId": "42883153-5f9a-459b-8760-9adf930486c1",
+      "info": {
+        "id": "opencode/mimo-v2.5-free",
+        "displayName": "OpenCode Zen/MiMo V2.5 Free"
+      },
+      "configuredModelId": "483779a2-599b-4ec6-a96f-589ba3af5c58",
+      "configuredAt": 1788616815909
+    },
+    {
+      "providerId": "42883153-5f9a-459b-8760-9adf930486c1",
+      "info": {
+        "id": "opencode/muse-spark-1.2-contributor-free",
+        "displayName": "OpenCode Zen/Muse Spark 1.2 Free"
+      },
+      "configuredModelId": "2cbe6a9d-e124-4520-bc99-ce63341046ac",
+      "configuredAt": 1788616815916
+    },
+    {
+      "providerId": "42883153-5f9a-459b-8760-9adf930486c1",
+      "info": {
+        "id": "opencode/muse-spark-1.3-contributor-free",
+        "displayName": "OpenCode Zen/Muse Spark 1.3 Free"
+      },
+      "configuredModelId": "fc467139-eaab-4635-a995-d3b1beb4b349",
+      "configuredAt": 1788616815916
+    },
+    {
+      "providerId": "42883153-5f9a-459b-8760-9adf930486c1",
+      "info": {
+        "id": "opencode/nemotron-3-ultra-free",
+        "displayName": "OpenCode Zen/Nemotron 3 Ultra Free"
+      },
+      "configuredModelId": "0750b3d4-f4bd-4644-9628-fb59c3706284",
+      "configuredAt": 1788616815916
+    },
+    {
+      "providerId": "42883153-5f9a-459b-8760-9adf930486c1",
+      "info": {
+        "id": "opencode/nemotron-3.5-lightning-free",
+        "displayName": "OpenCode Zen/Nemotron 3.5 Lightning Free"
+      },
+      "configuredModelId": "81d29765-8cf0-43d4-996b-c7984e333adb",
+      "configuredAt": 1788616815916
+    }
+  ],
+  "backends": {
+    "chat": {
+      "enabledModels": []
+    },
+    "opencode": {
+      "enabledModels": [
+        "805bad06-2c2c-45b6-b866-4e17dd7333c4",
+        "03c432f4-1913-47ee-bec4-d4ae1fc2d02c",
+        "483779a2-599b-4ec6-a96f-589ba3af5c58"
+      ]
+    }
+  },
   "_keychainVaultId": "848aa00a",
   "settingsVersion": 13
 }
