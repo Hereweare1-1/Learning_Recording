@@ -1,3 +1,4 @@
+
 ````
 # Python 文件读写常用方法
 
@@ -143,6 +144,39 @@ with open()  → 推荐的文件操作方式
 encoding="utf-8" → 指定文件使用 UTF-8 编码
 ```
 
+## 1. 相对路径
+````
+从当前文件所在目录开始查找。
+
+- `./`：当前目录，`./` 可以省略
+- `../`：上一级目录
+- `../../`：上两级目录
+
+例如：
+
+```text
+./resources/望庐山瀑布.txt
+../第2章/file/寻隐者不遇.txt
+../../第2章/file/寻隐者不遇.txt
+````
+
+## 2. 绝对路径
+
+从文件系统根目录开始，写出文件的完整路径。
+
+Windows：
+
+```
+D:\Python-Project\py_project01\第3章\resources\望庐山瀑布.txt
+```
+
+也可以使用 `/`：
+
+```
+D:/Python-Project/py_project01/第3章/resources/望庐山瀑布.txt
+```
+
+> 注意：Windows 路径中的 `\` 在 Python 字符串中可能表示转义字符。
 ## JSON文件
 ````
 import json
