@@ -1,14 +1,6 @@
 ````
 # Python 文件读写常用方法
 
-
-
-
-
-
-
-
-
 # 1. 打开文件：open()
 file = open("test.txt", "r", encoding="utf-8")
 ````
