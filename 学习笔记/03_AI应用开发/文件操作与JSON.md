@@ -1,13 +1,14 @@
+# 文件操作与 JSON
 
-````
-# Python 文件读写常用方法
+## Python 文件读写常用方法
 
-# 1. 打开文件：open()
+### 1. 打开文件：open()
+
+```python
 file = open("test.txt", "r", encoding="utf-8")
-````
+```
 
-### 常用模式
-
+#### 常用模式
 
 | 模式     | 含义            |     |
 | ------ | ------------- | --- |
@@ -18,7 +19,7 @@ file = open("test.txt", "r", encoding="utf-8")
 
 ---
 
-## 2. 读取全部内容：read()
+### 2. 读取全部内容：read()
 
 ```
 with open("test.txt", "r", encoding="utf-8") as file:
@@ -27,7 +28,7 @@ with open("test.txt", "r", encoding="utf-8") as file:
 ```
 ---
 
-## 3. 读取一行：readline()
+### 3. 读取一行：readline()
 
 ```
 with open("test.txt", "r", encoding="utf-8") as file:
@@ -45,7 +46,7 @@ line3 = file.readline()
 
 ---
 
-## 4. 读取所有行：readlines()
+### 4. 读取所有行：readlines()
 
 ```
 with open("test.txt", "r", encoding="utf-8") as file:
@@ -75,7 +76,7 @@ with open("test.txt", "r", encoding="utf-8") as file:
 
 ---
 
-## 5. 写入内容：write()
+### 5. 写入内容：write()
 
 ```
 with open("test.txt", "w", encoding="utf-8") as file:
@@ -84,7 +85,7 @@ with open("test.txt", "w", encoding="utf-8") as file:
 
 `write()`：向文件中写入字符串。
 
-### 注意
+#### 注意
 
 使用 `"w"` 模式时：
 
@@ -92,7 +93,7 @@ with open("test.txt", "w", encoding="utf-8") as file:
 
 ---
 
-## 6. 追加内容：a
+### 6. 追加内容：a
 
 ```
 with open("test.txt", "a", encoding="utf-8") as file:
@@ -105,7 +106,7 @@ with open("test.txt", "a", encoding="utf-8") as file:
 
 ---
 
-## 7. 推荐写法：with open()
+### 7. 推荐写法：with open()
 
 推荐使用：
 
@@ -124,7 +125,7 @@ file.close()
 
 ---
 
-# 重点速记
+## 重点速记
 
 ```
 open()       → 打开文件
@@ -144,8 +145,10 @@ with open()  → 推荐的文件操作方式
 encoding="utf-8" → 指定文件使用 UTF-8 编码
 ```
 
-## 1. 相对路径
-````
+## 文件路径
+
+### 1. 相对路径
+
 从当前文件所在目录开始查找。
 
 - `./`：当前目录，`./` 可以省略
@@ -158,9 +161,9 @@ encoding="utf-8" → 指定文件使用 UTF-8 编码
 ./resources/望庐山瀑布.txt
 ../第2章/file/寻隐者不遇.txt
 ../../第2章/file/寻隐者不遇.txt
-````
+```
 
-## 2. 绝对路径
+### 2. 绝对路径
 
 从文件系统根目录开始，写出文件的完整路径。
 
@@ -177,16 +180,20 @@ D:/Python-Project/py_project01/第3章/resources/望庐山瀑布.txt
 ```
 
 > 注意：Windows 路径中的 `\` 在 Python 字符串中可能表示转义字符。
-## JSON文件
-````
+
+## JSON 文件
+
+### 1. 导入 json 模块
+
+```python
 import json
-````
+```
 
 使用 Python 自带的 `json` 模块来处理 JSON 数据。
 
 ---
 
-## 2. 写入 JSON 数据文件：json.dump()
+### 2. 写入 JSON 数据文件：json.dump()
 
 ```
 user = {
@@ -200,7 +207,7 @@ with open("resources/user.json", "w", encoding="utf-8") as f:
     json.dump(user, f, ensure_ascii=False, indent=2)
 ```
 
-### json.dump()
+#### json.dump()
 
 ```
 json.dump(数据, 文件对象)
@@ -209,9 +216,9 @@ json.dump(数据, 文件对象)
 作用：
 
 > 将 Python 中的数据写入 JSON 文件。
-### 常用参数
+#### 常用参数
 
-#### ensure_ascii
+##### ensure_ascii
 
 ```
 ensure_ascii=False
@@ -240,7 +247,7 @@ ensure_ascii=False
 
 ---
 
-#### indent
+##### indent
 
 ```
 indent=2
@@ -261,7 +268,7 @@ indent=2
 
 ---
 
-## 3. 读取 JSON 数据文件：json.load()
+### 3. 读取 JSON 数据文件：json.load()
 
 ```
 with open("resources/user.json", "r", encoding="utf-8") as f:
@@ -269,7 +276,7 @@ with open("resources/user.json", "r", encoding="utf-8") as f:
     print(user)
 ```
 
-### json.load()
+#### json.load()
 
 ```
 json.load(文件对象)
