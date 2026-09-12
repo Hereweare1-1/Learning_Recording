@@ -10,18 +10,18 @@ file = open("test.txt", "r", encoding="utf-8")
 
 #### 常用模式
 
-| 模式     | 含义            |     |
-| ------ | ------------- | --- |
-| `"r"`  | 读取文件          |     |
-| `"w"`  | 写入文件，会覆盖原内容   |     |
-| `"a"`  | 追加内容，在文件末尾继续写 |     |
-| `"r+"` | 读取 + 写入       |     |
+| 模式 | 含义 |
+| --- | --- |
+| `"r"` | 读取文件 |
+| `"w"` | 写入文件，会覆盖原内容 |
+| `"a"` | 追加内容，在文件末尾继续写 |
+| `"r+"` | 读取 + 写入 |
 
 ---
 
 ### 2. 读取全部内容：read()
 
-```
+```python
 with open("test.txt", "r", encoding="utf-8") as file:
     content = file.read()
     print(content)
@@ -30,7 +30,7 @@ with open("test.txt", "r", encoding="utf-8") as file:
 
 ### 3. 读取一行：readline()
 
-```
+```python
 with open("test.txt", "r", encoding="utf-8") as file:
     line = file.readline()
     print(line)
@@ -38,7 +38,7 @@ with open("test.txt", "r", encoding="utf-8") as file:
 
 连续调用可以继续读取下一行：
 
-```
+```python
 line1 = file.readline()
 line2 = file.readline()
 line3 = file.readline()
@@ -48,7 +48,7 @@ line3 = file.readline()
 
 ### 4. 读取所有行：readlines()
 
-```
+```python
 with open("test.txt", "r", encoding="utf-8") as file:
     lines = file.readlines()
     print(lines)
@@ -58,7 +58,7 @@ with open("test.txt", "r", encoding="utf-8") as file:
 
 例如文件内容：
 
-```
+```text
 第一行
 第二行
 第三行
@@ -66,7 +66,7 @@ with open("test.txt", "r", encoding="utf-8") as file:
 
 读取后：
 
-```
+```python
 [
     "第一行\n",
     "第二行\n",
@@ -78,7 +78,7 @@ with open("test.txt", "r", encoding="utf-8") as file:
 
 ### 5. 写入内容：write()
 
-```
+```python
 with open("test.txt", "w", encoding="utf-8") as file:
     file.write("你好")
 ```
@@ -95,7 +95,7 @@ with open("test.txt", "w", encoding="utf-8") as file:
 
 ### 6. 追加内容：a
 
-```
+```python
 with open("test.txt", "a", encoding="utf-8") as file:
     file.write("新的内容")
 ```
@@ -110,7 +110,7 @@ with open("test.txt", "a", encoding="utf-8") as file:
 
 推荐使用：
 
-```
+```python
 with open("test.txt", "r", encoding="utf-8") as file:
     content = file.read()
 ```
@@ -119,7 +119,7 @@ with open("test.txt", "r", encoding="utf-8") as file:
 
 因此不需要手动：
 
-```
+```python
 file.close()
 ```
 
@@ -127,7 +127,7 @@ file.close()
 
 ## 重点速记
 
-```
+```text
 open()       → 打开文件
 
 "r"          → 读取
@@ -169,13 +169,13 @@ encoding="utf-8" → 指定文件使用 UTF-8 编码
 
 Windows：
 
-```
+```text
 D:\Python-Project\py_project01\第3章\resources\望庐山瀑布.txt
 ```
 
 也可以使用 `/`：
 
-```
+```text
 D:/Python-Project/py_project01/第3章/resources/望庐山瀑布.txt
 ```
 
@@ -195,7 +195,7 @@ import json
 
 ### 2. 写入 JSON 数据文件：json.dump()
 
-```
+```python
 user = {
     "name": "涛哥",
     "age": 18,
@@ -209,7 +209,7 @@ with open("resources/user.json", "w", encoding="utf-8") as f:
 
 #### json.dump()
 
-```
+```python
 json.dump(数据, 文件对象)
 ```
 
@@ -220,7 +220,7 @@ json.dump(数据, 文件对象)
 
 ##### ensure_ascii
 
-```
+```python
 ensure_ascii=False
 ```
 
@@ -231,7 +231,7 @@ ensure_ascii=False
 
 默认：
 
-```
+```python
 ensure_ascii=True
 ```
 
@@ -239,7 +239,7 @@ ensure_ascii=True
 
 设置：
 
-```
+```python
 ensure_ascii=False
 ```
 
@@ -249,7 +249,7 @@ ensure_ascii=False
 
 ##### indent
 
-```
+```python
 indent=2
 ```
 
@@ -259,7 +259,7 @@ indent=2
 
 例如：
 
-```
+```json
 {
   "name": "涛哥",
   "age": 18
@@ -270,7 +270,7 @@ indent=2
 
 ### 3. 读取 JSON 数据文件：json.load()
 
-```
+```python
 with open("resources/user.json", "r", encoding="utf-8") as f:
     user = json.load(f)
     print(user)
@@ -278,7 +278,7 @@ with open("resources/user.json", "r", encoding="utf-8") as f:
 
 #### json.load()
 
-```
+```python
 json.load(文件对象)
 ```
 
@@ -288,7 +288,7 @@ json.load(文件对象)
 
 例如：
 
-```
+```python
 user = json.load(f)
 ```
 
@@ -296,7 +296,7 @@ user = json.load(f)
 
 例如 JSON 文件：
 
-```
+```json
 {
   "name": "涛哥",
   "age": 18,
@@ -306,7 +306,7 @@ user = json.load(f)
 
 读取后可以：
 
-```
+```python
 print(user["name"])
 print(user["age"])
 ```

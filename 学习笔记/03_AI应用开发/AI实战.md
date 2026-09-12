@@ -8,7 +8,7 @@
 
 #### 1. 页面显示
 
-```
+```python
 st.title("标题")              # 页面大标题
 st.header("标题")             # 小标题
 st.write("内容")              # 显示内容，最常用
@@ -17,7 +17,7 @@ st.markdown("**加粗**")       # 显示 Markdown
 
 #### 2. 用户输入
 
-```
+```python
 st.text_input("请输入")       # 单行文本输入
 st.text_area("请输入")        # 多行文本输入
 st.button("按钮")             # 按钮
@@ -26,7 +26,7 @@ st.chat_input("请输入")       # 聊天输入框
 
 例如：
 
-```
+```python
 prompt = st.chat_input("请输入您的问题")
 ```
 
@@ -34,33 +34,33 @@ prompt = st.chat_input("请输入您的问题")
 
 #### 3. 聊天界面
 
-```
+```python
 st.chat_message("user")       # 用户消息
 st.chat_message("assistant")   # AI消息
 ```
 
 常见写法：
 
-```
+```python
 st.chat_message("user").write(prompt)
 ```
 
 也可以写成：
 
-```
+```python
 with st.chat_message("user"):
     st.write(prompt)
 ```
 
 #### 4. 状态保存
 
-```
+```python
 st.session_state
 ```
 
 用于保存网页运行过程中的数据，例如：
 
-```
+```python
 st.session_state["messages"] = []
 ```
 
@@ -68,7 +68,7 @@ st.session_state["messages"] = []
 
 #### 5. 页面布局
 
-```
+```python
 st.sidebar        # 侧边栏
 st.columns()      # 多列布局
 st.tabs()         # 标签页
@@ -76,7 +76,7 @@ st.tabs()         # 标签页
 
 #### 6. 其他常用功能
 
-```
+```python
 st.file_uploader()    # 文件上传
 st.success()          # 成功提示
 st.error()            # 错误提示
@@ -87,7 +87,7 @@ st.rerun()            # 重新运行页面
 
 ### AI聊天基本结构
 
-```
+```python
 prompt = st.chat_input("请输入您的问题")
 
 if prompt:

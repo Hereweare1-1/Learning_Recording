@@ -13,7 +13,7 @@ FastAPI是一个现代、快速、高性能的Python Web框架，可以用于开
 - 创建路径操作函数，定义访问路径。
 - 运行FastAPI服务。
 
-```
+```python
 from fastapi import FastAPI
 
 # 创建FastAPI实例
@@ -47,19 +47,19 @@ if __name__ == "__main__":
 
 方式一：
 
-```
+```bash
 fastapi dev xxxx.py
 ```
 
 方式二：
 
-```
+```bash
 uvicorn xxxx:app --reload
 ```
 
 方式三：在代码中启动
 
-```
+```python
 if __name__ == "__main__":
     import uvicorn
 
