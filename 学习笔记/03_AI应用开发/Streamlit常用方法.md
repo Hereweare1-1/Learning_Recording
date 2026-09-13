@@ -5,6 +5,26 @@
 
 ---
 
+## 使用前准备
+
+Streamlit是一个Python库，可以只使用Python快速制作网页界面，不需要先编写HTML、CSS和JavaScript。
+
+安装：
+
+```bash
+pip install streamlit
+```
+
+在程序文件所在目录运行：
+
+```bash
+streamlit run 文件名.py
+```
+
+AI聊天项目的整体结构可以查看[[Streamlit AI聊天项目]]。
+
+---
+
 ## 一、页面与文本
 
 ### `st.title()`

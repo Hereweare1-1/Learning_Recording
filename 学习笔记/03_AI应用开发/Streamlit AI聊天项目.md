@@ -1,104 +1,60 @@
 # Streamlit AI聊天项目
-## streamlit
-- Python 库，**不用写 HTML/CSS/JS，只用 Python 通过它提供的功能就可以做出网页界面**
-- 通过 **pip install streamlit** 安装
-- 在对应文件所在目录下的终端通过 **streamlit run 文件名.py** 运行程序
 
-### 常用方法
+## 1. 项目作用
 
-#### 1. 页面显示
+这个项目使用Streamlit制作AI聊天网页。用户在页面中输入问题，程序调用大模型API，再把回答显示到页面中。
 
-```python
-st.title("标题")              # 页面大标题
-st.header("标题")             # 小标题
-st.write("内容")              # 显示内容，最常用
-st.markdown("**加粗**")       # 显示 Markdown
-```
+开始前可以先查看：
 
-#### 2. 用户输入
+- Streamlit组件：[[Streamlit常用方法]]
+- 大模型调用流程：[[大模型API调用]]
 
-```python
-st.text_input("请输入")       # 单行文本输入
-st.text_area("请输入")        # 多行文本输入
-st.button("按钮")             # 按钮
-st.chat_input("请输入")       # 聊天输入框
-```
+## 2. 需要用到的核心方法
 
-例如：
+| 方法 | 在聊天项目中的作用 |
+| --- | --- |
+| `st.chat_input()` | 获取用户输入的问题 |
+| `st.chat_message()` | 显示用户消息和AI消息 |
+| `st.session_state` | 保存聊天记录和会话状态 |
+
+其他页面、布局和提示方法统一整理在[[Streamlit常用方法]]中。
+
+## 3. AI聊天的基本结构
 
 ```python
+import streamlit as st
+
 prompt = st.chat_input("请输入您的问题")
+
+if prompt:
+    st.chat_message("user").write(prompt)
+
+    # 调用大模型API
+    response = ...
+
+    st.chat_message("assistant").write(response)
 ```
 
-`st.chat_input()` 会创建聊天输入框，并返回用户输入的内容。
-
-#### 3. 聊天界面
-
-```python
-st.chat_message("user")       # 用户消息
-st.chat_message("assistant")   # AI消息
-```
-
-常见写法：
-
-```python
-st.chat_message("user").write(prompt)
-```
-
-也可以写成：
+`st.chat_message()`也可以配合`with`使用：
 
 ```python
 with st.chat_message("user"):
     st.write(prompt)
 ```
 
-#### 4. 状态保存
+## 4. 整体流程
 
-```python
-st.session_state
+```text
+用户输入问题
+   ↓
+st.chat_input()获得prompt
+   ↓
+调用大模型API
+   ↓
+获得response
+   ↓
+st.chat_message()显示AI回复
 ```
 
-用于保存网页运行过程中的数据，例如：
-
-```python
-st.session_state["messages"] = []
-```
-
-常用于保存**聊天记录、会话状态**等。
-
-#### 5. 页面布局
-
-```python
-st.sidebar        # 侧边栏
-st.columns()      # 多列布局
-st.tabs()         # 标签页
-```
-
-#### 6. 其他常用功能
-
-```python
-st.file_uploader()    # 文件上传
-st.success()          # 成功提示
-st.error()            # 错误提示
-st.warning()          # 警告提示
-st.spinner()          # 加载提示
-st.rerun()            # 重新运行页面
-```
-
-### AI聊天基本结构
-
-```python
-prompt = st.chat_input("请输入您的问题")
-
-if prompt:
-    st.chat_message("user").write(prompt)
-
-    # 调用大模型 API
-    response = ...
-
-    st.chat_message("assistant").write(response)
-```
-
-整体流程：
-
-**用户输入 → 获取 prompt → 调用大模型 → 获取 response → 显示 AI 回复**
+> [!summary] 一句话理解
+> Streamlit负责网页输入和显示，大模型API负责生成回答。
