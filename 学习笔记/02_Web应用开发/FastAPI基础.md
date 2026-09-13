@@ -4,6 +4,8 @@
 
 FastAPI是一个现代、快速、高性能的Python Web框架，可以用于开发服务端API接口。
 
+建议先了解[[Web网络基础]]和[[RESTful API设计]]。
+
 ## 2. 使用FastAPI开发服务端接口
 
 主要步骤：
