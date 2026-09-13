@@ -330,6 +330,66 @@ GET /api/courses?name=Python&status=1 HTTP/1.1
 
 服务器处理请求后会返回HTTP响应，响应通常包含状态码和响应数据。
 
+#### HTTP响应报文的结构
+
+下面是一段简化后的HTTP响应：
+
+```http
+HTTP/1.1 200 OK
+Server: nginx
+Content-Type: application/json
+Connection: keep-alive
+
+{"code": 1, "message": "success", "data": null}
+```
+
+它由三部分组成：
+
+```text
+响应行
+响应头
+空行
+响应体（可以没有）
+```
+
+**响应行**
+
+响应行位于第一行，由HTTP版本、状态码和状态说明组成：
+
+```text
+HTTP/1.1 200 OK
+```
+
+| 内容 | 示例 | 作用 |
+| --- | --- | --- |
+| HTTP版本 | `HTTP/1.1` | 表示使用的HTTP版本 |
+| 状态码 | `200` | 使用数字说明处理结果 |
+| 状态说明 | `OK` | 对状态码的简短文字说明 |
+
+**响应头**
+
+响应头和请求头一样，也采用`名称: 值`的格式。
+
+| 常见响应头 | 作用 |
+| --- | --- |
+| `Server` | 服务器软件信息 |
+| `Date` | 服务器产生响应的时间 |
+| `Content-Type` | 响应体的数据类型，例如`application/json` |
+| `Content-Length` | 响应体的字节长度 |
+| `Connection` | 当前连接的管理方式 |
+
+**响应体**
+
+响应体存放服务器返回的实际数据，可以是JSON、HTML、图片或其他内容。API通常返回JSON数据：
+
+```json
+{
+  "code": 1,
+  "message": "success",
+  "data": null
+}
+```
+
 常见状态码：
 
 | 状态码 | 含义 |
