@@ -1,4 +1,4 @@
-# 文件操作与 JSON
+# Python文件读写与JSON
 
 ## Python 文件读写常用方法
 
@@ -181,7 +181,24 @@ D:/Python-Project/py_project01/第3章/resources/望庐山瀑布.txt
 
 > 注意：Windows 路径中的 `\` 在 Python 字符串中可能表示转义字符。
 
-## JSON 文件
+## JSON是什么
+
+**JSON**是一种用于程序之间传递和保存结构化数据的格式。它的写法和Python字典、列表很像：
+
+```json
+{
+  "name": "张三",
+  "age": 20,
+  "hobbies": ["音乐", "游戏"]
+}
+```
+
+> [!important] JSON不等于Python字典
+> JSON是一种数据格式；Python读取JSON后，通常会得到`dict`、`list`等Python对象。
+
+API经常使用JSON传递数据，因为它结构清晰、跨语言，并且容易被程序解析。API相关概念可以查看[[Web网络基础#9. API是什么]]。
+
+## JSON文件
 
 ### 1. 导入 json 模块
 
