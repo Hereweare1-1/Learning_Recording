@@ -232,6 +232,98 @@ HTTP本身不会自动记住前后两次请求来自同一个用户，每次请�
 - **Headers（请求头）**：携带身份认证、数据类型等额外信息。
 - **Body（请求体）**：发送给服务器的数据，API中经常使用JSON格式。
 
+#### HTTP请求报文的结构
+
+下面是一段简化后的HTTP请求：
+
+```http
+POST /api/courses HTTP/1.1
+Host: localhost:90
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer example-token
+
+{"name": "Python", "status": 1}
+```
+
+它由三部分组成：
+
+```text
+请求行
+请求头
+空行
+请求体（可以没有）
+```
+
+**请求行**
+
+请求行位于第一行，由请求方法、资源路径和HTTP版本组成：
+
+```text
+POST /api/courses HTTP/1.1
+```
+
+| 内容 | 示例 | 作用 |
+| --- | --- | --- |
+| 请求方法 | `POST` | 表示要进行什么操作 |
+| 资源路径 | `/api/courses` | 表示请求哪个资源 |
+| HTTP版本 | `HTTP/1.1` | 表示使用的HTTP版本 |
+
+**请求头**
+
+请求头采用`名称: 值`的格式，每一行表示一项附加信息。
+
+| 常见请求头 | 作用 |
+| --- | --- |
+| `Host` | 目标服务器的域名或地址 |
+| `Accept` | 客户端希望接收的数据类型 |
+| `Content-Type` | 请求体的数据类型，例如`application/json` |
+| `Authorization` | 身份认证信息，例如Token |
+| `Content-Length` | 请求体的字节长度 |
+
+**请求体**
+
+请求体用于携带提交给服务器的数据，并不是每个请求都有请求体。发送JSON数据时，需要把`Content-Type`设置为`application/json`。
+
+```json
+{
+  "name": "Python",
+  "status": 1
+}
+```
+
+#### GET和POST如何携带参数
+
+`GET`请求通常把参数写在URL的查询字符串中：
+
+```http
+GET /api/courses?name=Python&status=1 HTTP/1.1
+```
+
+- `?`表示查询参数开始。
+- 多个参数使用`&`连接。
+- 因为参数会显示在URL中，所以不适合直接放密码等敏感信息。
+- `GET`请求通常不使用请求体。
+
+`POST`请求通常把要提交的数据放在请求体中：
+
+```json
+{
+  "name": "Python",
+  "status": 1
+}
+```
+
+| 对比项 | GET | POST |
+| --- | --- | --- |
+| 常见用途 | 查询、获取数据 | 提交、新增数据或执行操作 |
+| 参数常见位置 | URL查询字符串 | 请求体 |
+| 是否通常有请求体 | 否 | 可以有 |
+| 大小限制 | URL长度会受到浏览器、服务器等限制 | 协议没有统一的固定上限，但服务器和框架通常会限制请求体大小 |
+
+> [!important] 注意
+> 不能简单地记成“POST请求大小没有限制”。实际项目中的Web服务器、网关和后端框架通常都会设置大小上限。
+
 请求方法的具体用法可以查看[[RESTful API设计]]。
 
 ### 8.3 HTTP响应
