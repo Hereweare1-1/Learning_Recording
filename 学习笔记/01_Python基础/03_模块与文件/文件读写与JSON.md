@@ -196,7 +196,7 @@ D:/Python-Project/py_project01/第3章/resources/望庐山瀑布.txt
 > [!important] JSON不等于Python字典
 > JSON是一种数据格式；Python读取JSON后，通常会得到`dict`、`list`等Python对象。
 
-API经常使用JSON传递数据，因为它结构清晰、跨语言，并且容易被程序解析。API相关概念可以查看[[Web网络基础#9. API是什么]]。
+API经常使用JSON传递数据，因为它结构清晰、跨语言，并且容易被程序解析。API相关概念可以查看[[Web网络基础#10. API是什么]]。
 
 ## JSON文件
 
