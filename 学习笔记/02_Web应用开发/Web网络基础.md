@@ -77,7 +77,7 @@ IP地址:端口号
 
 它表示：访问本机中监听`8000`端口的程序。
 
-在[[FastAPI基础|FastAPI]]中，可以这样启动服务：
+在[[FastAPI快速入门|FastAPI]]中，可以这样启动服务：
 
 ```python
 import uvicorn
