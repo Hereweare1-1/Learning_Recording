@@ -195,6 +195,39 @@ async def create_book(book: BookCreate):
 
 FastAPI会自动读取JSON、转换数据类型并进行校验。请求体常用于`POST`、`PUT`和`PATCH`请求；虽然FastAPI支持为`GET`请求声明请求体，但这种做法不推荐。
 
+### 4.1 使用Field增加模型字段校验
+
+模型中的`title: str`和`price: float`是Python类型注解，负责说明字段的数据类型。需要增加长度、数值范围或描述等规则时，可以使用Pydantic提供的`Field()`。
+
+```python
+from pydantic import BaseModel, Field
+
+
+class BookCreate(BaseModel):
+    title: str = Field(min_length=1, max_length=50, description="图书名称")
+    price: float = Field(gt=0, description="图书价格")
+```
+
+这个例子规定：
+
+- `title`必须是字符串，长度为`1～50`个字符。
+- `price`必须是浮点数，并且大于`0`。
+- `description`会成为自动生成的接口文档中的字段说明。
+
+常用规则：
+
+| `Field()`参数 | 含义 |
+| --- | --- |
+| `...` | 表示必填，例如`Field(...)` |
+| `default` | 设置默认值 |
+| `gt`、`ge` | 大于、大于或等于 |
+| `lt`、`le` | 小于、小于或等于 |
+| `min_length`、`max_length` | 限制字符串长度 |
+| `description` | 添加字段说明 |
+
+> [!important] 注意来源
+> `Field()`来自Pydantic，不是FastAPI；`Path()`、`Query()`和`Body()`才从FastAPI中导入。
+
 ## 5. FastAPI怎样判断参数来自哪里
 
 ```text
@@ -214,8 +247,34 @@ FastAPI会自动读取JSON、转换数据类型并进行校验。请求体常用
 > [!summary] 简单记忆
 > 路径参数负责“找到谁”，查询参数负责“怎么筛选”，请求体负责“提交什么数据”。
 
-## 6. 官方资料
+## 6. 三种请求参数的注解总结
+
+### 6.1 Python类型注解与框架工具的分工
+
+```text
+Python类型注解：说明数据是什么类型
+        +
+Path、Query、Body、Field：补充数据来源、校验规则和说明
+```
+
+例如，`book_id: int`中的`int`是Python类型注解；`Path(gt=0)`则进一步规定它来自路径，并且必须大于`0`。
+
+`Annotated`来自Python标准库中的`typing`模块，用于把类型和额外规则组合在一起，它本身也不是FastAPI提供的。
+
+### 6.2 三种参数对照
+
+| 参数类型 | 只使用Python类型注解 | 增加框架规则 | 工具来源 |
+| --- | --- | --- | --- |
+| 路径参数 | `book_id: int` | `book_id: Annotated[int, Path(gt=0)]` | `Path`来自FastAPI |
+| 查询参数 | `keyword: str | None = None` | `keyword: Annotated[str | None, Query(max_length=50)] = None` | `Query`来自FastAPI |
+| 请求体 | `book: BookCreate`，模型字段使用`title: str` | 整个请求体使用`Body()`；模型内部字段使用`Field()` | `Body`来自FastAPI，`Field`来自Pydantic |
+
+> [!summary] 我的记忆方法
+> 先用Python类型注解写清楚“它是什么”，再按需要使用`Path()`、`Query()`、`Body()`或`Field()`补充“它从哪里来、有什么限制”。
+
+## 7. 官方资料
 
 - [FastAPI路径参数与数值校验](https://fastapi.tiangolo.com/tutorial/path-params-numeric-validations/)
 - [FastAPI查询参数](https://fastapi.tiangolo.com/tutorial/query-params/)
 - [FastAPI请求体](https://fastapi.tiangolo.com/tutorial/body/)
+- [FastAPI请求体字段](https://fastapi.tiangolo.com/tutorial/body-fields/)
