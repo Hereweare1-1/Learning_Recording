@@ -118,15 +118,41 @@ async def get_file():
 
 ## 5. 两种响应类型设置方式
 
-```text
-响应类型固定
-    ↓
-在装饰器中设置response_class
+### 5.1 在装饰器中设置response_class
 
-需要在函数中决定具体响应内容
-    ↓
-直接返回HTMLResponse或FileResponse对象
+当一个接口的响应类型固定时，可以在装饰器中设置`response_class`，然后让函数返回普通内容。
+
+```python
+@app.get("/html", response_class=HTMLResponse)
+async def get_html():
+    return "<h1>这是标题</h1>"
 ```
+
+这种方式的优点是：只看装饰器就能知道接口返回HTML，而且FastAPI可以在接口文档中记录正确的响应类型。
+
+### 5.2 在函数中直接返回响应对象
+
+当函数需要提供文件路径、下载文件名、状态码或响应头等具体信息时，可以直接创建并返回响应对象。
+
+```python
+@app.get("/file")
+async def get_file():
+    return FileResponse(path="files/example.pdf", filename="example.pdf")
+```
+
+这时返回的`FileResponse`已经是一个完整响应，FastAPI会直接把它发送给客户端。仅直接返回响应对象时，自动生成的接口文档不一定能知道实际的响应类型。
+
+### 5.3 应该怎样选择
+
+| 情况 | 适合的方式 |
+| --- | --- |
+| 接口固定返回HTML等某种类型 | 在装饰器中设置`response_class` |
+| 需要传入文件路径、下载名称等具体参数 | 直接返回`FileResponse`等响应对象 |
+| 需要动态设置状态码或响应头 | 直接返回响应对象 |
+| 既想让接口文档记录响应类型，又要自己构造响应对象 | 设置`response_class`，同时返回响应对象 |
+
+> [!summary] 简单记忆
+> 类型固定、内容简单时，在装饰器中声明；需要自己控制具体响应细节时，直接返回响应对象。
 
 现阶段我只需要重点掌握：普通API直接返回JSON数据，网页内容使用`HTMLResponse`，文件下载使用`FileResponse`。
 
