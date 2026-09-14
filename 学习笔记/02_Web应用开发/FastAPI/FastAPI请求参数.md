@@ -163,7 +163,7 @@ http://127.0.0.1:8000/books?keyword=Python&skip=0&limit=10
 > [!tip] 现阶段怎样写
 > 简单查询参数直接使用Python类型注解；需要额外校验时，优先使用官方推荐的`Annotated[类型, Query(...)]`写法。
 
-## 4. 请求体
+## 4. 请求体参数
 
 请求体用于携带要提交给服务器的数据，通常使用JSON格式。FastAPI一般使用Pydantic模型描述请求体的数据结构。
 
