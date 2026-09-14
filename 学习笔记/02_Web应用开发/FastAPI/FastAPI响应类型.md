@@ -106,7 +106,17 @@ async def get_file():
 - 文件必须真实存在，否则接口会报错。
 - 项目中优先使用相对路径，避免把某台电脑独有的绝对路径写死在代码中。
 
-## 4. 两种响应类型设置方式
+## 4. 其他响应类型（了解）
+
+除了JSON、HTML和文件响应，FastAPI还提供下面这些响应类型。现阶段知道它们是做什么的即可，不需要展开学习。
+
+| 响应类型 | 作用 |
+| --- | --- |
+| `PlainTextResponse` | 返回不包含HTML标签的纯文本 |
+| `StreamingResponse` | 分批、持续地返回数据，适合较大的内容或实时数据 |
+| `RedirectResponse` | 告诉客户端跳转到另一个URL |
+
+## 5. 两种响应类型设置方式
 
 ```text
 响应类型固定
@@ -120,6 +130,6 @@ async def get_file():
 
 现阶段我只需要重点掌握：普通API直接返回JSON数据，网页内容使用`HTMLResponse`，文件下载使用`FileResponse`。
 
-## 5. 官方资料
+## 6. 官方资料
 
 - [FastAPI自定义响应](https://fastapi.tiangolo.com/advanced/custom-response/)
