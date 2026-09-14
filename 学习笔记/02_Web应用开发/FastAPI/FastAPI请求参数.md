@@ -216,14 +216,14 @@ class BookCreate(BaseModel):
 
 常用规则：
 
-| `Field()`参数 | 含义 |
-| --- | --- |
-| `...` | 表示必填，例如`Field(...)` |
-| `default` | 设置默认值 |
-| `gt`、`ge` | 大于、大于或等于 |
-| `lt`、`le` | 小于、小于或等于 |
-| `min_length`、`max_length` | 限制字符串长度 |
-| `description` | 添加字段说明 |
+| `Field()`参数               | 含义                  |
+| ------------------------- | ------------------- |
+| `...`                     | 表示必填，例如`Field(...)` |
+| `default`                 | 设置默认值               |
+| `gt`、`ge`                 | 大于、大于或等于            |
+| `lt`、`le`                 | 小于、小于或等于            |
+| `min_length`、`max_length` | 限制字符串长度             |
+| `description`             | 添加字段说明              |
 
 > [!important] 注意来源
 > `Path()`和`Query()`来自FastAPI，`Field()`来自Pydantic。
