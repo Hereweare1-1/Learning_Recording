@@ -10,7 +10,7 @@ FastAPI是一个现代、快速、高性能的Python Web框架，可以用于开
 
 - 以API开发为核心，适合开发API、微服务和AI模型服务。
 - 支持普通的`def`和异步的`async def`。
-- 结合Python类型注解和Pydantic，可以自动校验请求数据。
+- 结合Python类型注解和Pydantic，可以[[FastAPI请求参数#1.1 Python类型注解和Pydantic怎样完成自动校验|自动校验请求数据]]。
 - 根据OpenAPI自动生成Swagger UI和ReDoc接口文档。
 
 FastAPI与Flask、Django的详细区别可以查看[[Python Web框架对比]]。
