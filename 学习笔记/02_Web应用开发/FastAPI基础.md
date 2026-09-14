@@ -197,6 +197,52 @@ http://127.0.0.1:8000/books?keyword=Python&page=2
 - `page`的默认值是`1`，不传时会自动使用`1`。
 - 没有写在路由`/books`中的普通类型参数，会被FastAPI识别为查询参数。
 
+##### 使用Query增加校验规则
+
+普通类型注解已经可以声明查询参数。只有需要增加范围、长度、描述等规则时，才需要使用`Query()`。
+
+```python
+from typing import Annotated
+
+from fastapi import FastAPI, Query
+
+app = FastAPI()
+
+
+@app.get("/books")
+async def get_books(
+    keyword: Annotated[str | None, Query(max_length=50)] = None,
+    skip: Annotated[int, Query(ge=0)] = 0,
+    limit: Annotated[int, Query(gt=0, le=100)] = 10,
+):
+    return {
+        "keyword": keyword,
+        "skip": skip,
+        "limit": limit,
+    }
+```
+
+在这个例子中：
+
+- `keyword`最多包含`50`个字符，可以不传。
+- `skip`必须大于或等于`0`，默认值是`0`。
+- `limit`必须大于`0`且小于或等于`100`，默认值是`10`。
+
+```text
+http://127.0.0.1:8000/books?keyword=Python&skip=0&limit=10
+```
+
+查询参数是否必填主要由默认值决定：
+
+| 写法 | 是否必填 |
+| --- | --- |
+| `user_id: int` | 必填，没有默认值 |
+| `page: int = 1` | 非必填，不传时使用`1` |
+| `keyword: str | None = None` | 非必填，不传时使用`None` |
+
+> [!tip] 现阶段怎样写
+> 简单查询参数直接使用Python类型注解；需要额外校验时，优先使用官方推荐的`Annotated[类型, Query(...)]`写法。
+
 #### 请求体
 
 请求体用于携带要提交给服务器的数据，通常使用JSON格式。FastAPI一般使用Pydantic模型描述请求体的数据结构。
