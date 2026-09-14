@@ -226,7 +226,7 @@ class BookCreate(BaseModel):
 | `description` | 添加字段说明 |
 
 > [!important] 注意来源
-> `Field()`来自Pydantic，不是FastAPI；`Path()`、`Query()`和`Body()`才从FastAPI中导入。
+> `Path()`和`Query()`来自FastAPI，`Field()`来自Pydantic。
 
 ## 5. FastAPI怎样判断参数来自哪里
 
@@ -254,7 +254,7 @@ class BookCreate(BaseModel):
 ```text
 Python类型注解：说明数据是什么类型
         +
-Path、Query、Body、Field：补充数据来源、校验规则和说明
+Path、Query、Field：补充数据来源、校验规则和说明
 ```
 
 例如，`book_id: int`中的`int`是Python类型注解；`Path(gt=0)`则进一步规定它来自路径，并且必须大于`0`。
@@ -263,14 +263,14 @@ Path、Query、Body、Field：补充数据来源、校验规则和说明
 
 ### 6.2 三种参数对照
 
-| 参数类型 | 只使用Python类型注解                         | 增加框架规则                                | 工具来源                              |                                     |                  |
-| ---- | ------------------------------------- | ------------------------------------- | --------------------------------- | ----------------------------------- | ---------------- |
-| 路径参数 | `book_id: int`                        | `book_id: Annotated[int, Path(gt=0)]` | `Path`来自FastAPI                   |                                     |                  |
-| 查询参数 | `keyword: str                         | None = None`                          | `keyword: Annotated[str           | None, Query(max_length=50)] = None` | `Query`来自FastAPI |
-| 请求体  | `book: BookCreate`，模型字段使用`title: str` | 整个请求体使用`Body()`；模型内部字段使用`Field()`     | `Body`来自FastAPI，`Field`来自Pydantic |                                     |                  |
+| 参数类型 | 只使用Python类型注解                         | 增加校验规则                                                         | 工具来源              |
+| ---- | ------------------------------------- | -------------------------------------------------------------- | ----------------- |
+| 路径参数 | `book_id: int`                        | `book_id: Annotated[int, Path(gt=0)]`                          | `Path`来自FastAPI   |
+| 查询参数 | `keyword: str \| None = None`         | `keyword: Annotated[str \| None, Query(max_length=50)] = None` | `Query`来自FastAPI  |
+| 请求体  | `book: BookCreate`，模型字段使用`title: str` | 模型字段使用`title: str = Field(min_length=1)`                       | `Field`来自Pydantic |
 
 > [!summary] 我的记忆方法
-> 先用Python类型注解写清楚“它是什么”，再按需要使用`Path()`、`Query()`、`Body()`或`Field()`补充“它从哪里来、有什么限制”。
+> 先用Python类型注解写清楚“它是什么”，再按需要使用`Path()`、`Query()`或`Field()`补充“它从哪里来、有什么限制”。
 
 ## 7. 官方资料
 
