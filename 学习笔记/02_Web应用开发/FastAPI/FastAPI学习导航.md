@@ -5,7 +5,7 @@
 ## 1. 推荐学习顺序
 
 ```text
-FastAPI介绍 → FastAPI快速入门 → FastAPI路由 → FastAPI请求参数 → FastAPI响应模型 → FastAPI响应类型
+FastAPI介绍 → FastAPI快速入门 → FastAPI路由 → FastAPI请求参数 → FastAPI响应模型 → FastAPI响应类型 → FastAPI异常处理
 ```
 
 1. [[FastAPI介绍]]：了解FastAPI是什么、主要特点，以及我为什么优先学习它。
@@ -14,6 +14,7 @@ FastAPI介绍 → FastAPI快速入门 → FastAPI路由 → FastAPI请求参数 
 4. [[FastAPI请求参数]]：学习路径参数、查询参数、`Path()`、`Query()`和请求体。
 5. [[FastAPI响应模型]]：使用`response_model`约束JSON响应的数据结构。
 6. [[FastAPI响应类型]]：重点掌握JSON、HTML和文件三种响应。
+7. [[FastAPI异常处理]]：使用`HTTPException`返回明确的HTTP错误。
 
 ## 2. 相关笔记
 
