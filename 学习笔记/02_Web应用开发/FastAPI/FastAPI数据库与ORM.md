@@ -1,0 +1,96 @@
+# FastAPI数据库与ORM
+
+这篇笔记先整理ORM和FastAPI操作数据库的整体框架。现阶段我先理解各部分的作用和学习顺序，具体配置与增删改查代码后续再补充。
+
+## 1. ORM是什么
+
+**ORM（Object-Relational Mapping，对象关系映射）**是在面向对象编程语言和关系型数据库之间建立映射的技术。
+
+使用ORM后，可以把Python类和数据库表对应起来，把Python对象和表中的一行数据对应起来，并通过操作对象的方式完成常见数据库操作。
+
+```text
+Python类      ↔ 数据库表
+Python对象    ↔ 表中的一行数据
+对象的属性    ↔ 表中的字段
+```
+
+ORM不会让SQL完全消失。遇到复杂查询、性能优化和排查问题时，我仍然需要理解基本SQL。
+
+## 2. ORM的主要作用
+
+- 减少重复编写简单SQL的工作。
+- 让数据库操作代码更接近Python的面向对象写法。
+- 帮助管理数据库连接、会话和事务，但仍然需要正确配置和提交、回滚事务。
+- ORM通常使用参数化查询，可以降低SQL注入风险；如果错误拼接原始SQL，仍然可能出现安全问题。
+
+## 3. 常见ORM工具
+
+这里不进行主观排名，只根据框架关系和我的学习方向选择重点。
+
+| ORM工具 | 特点和适用场景 | 当前学习要求 |
+| --- | --- | --- |
+| SQLAlchemy ORM | 独立、功能完整，同时支持同步和异步用法，常与FastAPI配合 | **重点学习** |
+| Django ORM | Django内置的ORM，与Django项目结合紧密 | 了解即可 |
+| Tortoise ORM | 采用异步风格，API相对直观 | 了解即可 |
+
+FastAPI本身没有内置ORM，可以根据项目需求选择数据库工具。对当前的智能应用开发方向，我优先学习SQLAlchemy。
+
+## 4. FastAPI操作数据库的整体流程
+
+```text
+安装ORM和数据库驱动
+        ↓
+配置数据库连接和会话
+        ↓
+定义模型，建立类与表的映射
+        ↓
+创建或迁移数据库表
+        ↓
+通过依赖注入为路由提供数据库会话
+        ↓
+查询、新增、修改和删除数据
+        ↓
+提交或回滚事务，并释放会话资源
+```
+
+### 4.1 安装工具
+
+- 使用SQLAlchemy提供ORM和数据库操作能力。
+- 异步操作MySQL时，还需要`aiomysql`或其他兼容的异步数据库驱动。
+
+具体安装命令等正式学习数据库连接时再补充。
+
+### 4.2 建库和建表
+
+学习阶段可以通过`Base.metadata.create_all()`创建模型对应的数据表。使用异步连接时，会看到`run_sync(Base.metadata.create_all)`这样的写法。
+
+正式项目还会使用数据库迁移工具管理表结构变化，这部分后续再学习。
+
+### 4.3 操作数据
+
+数据库最常见的四类操作是CRUD：
+
+| 英文 | 中文 | 作用 |
+| --- | --- | --- |
+| Create | 新增 | 添加数据 |
+| Read | 查询 | 读取数据 |
+| Update | 修改 | 更新数据 |
+| Delete | 删除 | 移除数据 |
+
+## 5. ORM与依赖注入的关系
+
+数据库会话需要在请求开始时创建，并在使用结束后释放。FastAPI通常使用依赖注入把数据库会话提供给需要访问数据库的路由函数。
+
+依赖注入的基础内容见：[[FastAPI依赖注入]]。
+
+## 6. 现阶段需要掌握什么
+
+我需要理解ORM的映射关系、为什么使用ORM、SQLAlchemy的定位，以及FastAPI操作数据库的整体流程。数据库连接配置、模型字段、异步会话和CRUD代码是后续需要重点学习的内容；Django ORM和Tortoise ORM现阶段知道它们的定位即可。
+
+## 7. 官方资料
+
+- [SQLAlchemy ORM快速开始](https://docs.sqlalchemy.org/en/20/orm/quickstart.html)
+- [SQLAlchemy asyncio支持](https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html)
+- [Django模型与数据库](https://docs.djangoproject.com/en/5.2/topics/db/)
+- [Tortoise ORM入门](https://tortoise.github.io/getting_started.html)
+
