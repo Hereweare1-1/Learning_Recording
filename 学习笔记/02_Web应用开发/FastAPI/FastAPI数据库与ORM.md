@@ -1,6 +1,6 @@
 # FastAPI数据库与ORM
 
-这篇笔记先整理ORM和FastAPI操作数据库的整体框架。现阶段我先理解各部分的作用和学习顺序，具体配置与增删改查代码后续再补充。
+这篇笔记整理ORM和FastAPI操作数据库的整体流程。现阶段我先掌握异步引擎、模型类和创建表，具体的增删改查代码后续再补充。
 
 ## 1. ORM是什么
 
@@ -70,7 +70,116 @@ pip install "sqlalchemy[asyncio]" aiomysql
 
 学习数据库`fastapi_test`的创建步骤见：[[Windows安装MySQL并创建数据库#4. 创建并检查学习数据库]]。
 
+使用ORM创建表的顺序是：
 
+```text
+创建异步数据库引擎 → 定义模型类 → FastAPI启动时创建表
+```
+
+**第一步：创建异步数据库引擎**
+
+```python
+import os
+
+from sqlalchemy.ext.asyncio import create_async_engine
+
+DATABASE_URL = os.environ["DATABASE_URL"]
+
+async_engine = create_async_engine(
+    DATABASE_URL,
+    echo=True,
+    pool_size=10,
+    max_overflow=20,
+)
+```
+
+数据库连接地址的格式如下：
+
+```text
+mysql+aiomysql://用户名:密码@localhost:3306/fastapi_test?charset=utf8mb4
+```
+
+- `mysql+aiomysql`：使用MySQL和异步驱动`aiomysql`。
+- `localhost:3306`：MySQL运行在本机的`3306`端口。
+- `fastapi_test`：需要连接的数据库。
+- `echo=True`：开发时在终端输出SQL日志，方便观察和排错。
+- `pool_size`：连接池中长期保留的连接数量。
+- `max_overflow`：连接池繁忙时允许临时增加的连接数量。
+
+学习小项目可以暂时省略`pool_size`和`max_overflow`，先使用默认值。数据库地址通过环境变量读取，避免把真实密码直接写进代码和Git仓库。
+
+**第二步：定义模型类**
+
+```python
+from datetime import datetime
+
+from sqlalchemy import DateTime, String, func
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+
+
+class Base(DeclarativeBase):
+    pass
+
+
+class TimeMixin:
+    create_time: Mapped[datetime] = mapped_column(
+        DateTime,
+        server_default=func.now(),
+    )
+    update_time: Mapped[datetime] = mapped_column(
+        DateTime,
+        server_default=func.now(),
+        onupdate=func.now(),
+    )
+
+
+class Book(TimeMixin, Base):
+    __tablename__ = "book"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    bookname: Mapped[str] = mapped_column(String(255))
+    author: Mapped[str] = mapped_column(String(255))
+```
+
+- `Base`：所有ORM模型类共同继承的基类。
+- `TimeMixin`：集中定义多个表可以复用的创建时间和修改时间字段。
+- `Book`：对应数据库中的`book`表。
+- `Mapped[...]`：使用Python类型注解描述字段在Python中的类型。
+- `mapped_column()`：设置字段长度、主键和默认值等数据库规则。
+- `__tablename__`：指定模型对应的数据表名称。
+
+**第三步：应用启动时创建表**
+
+```python
+from contextlib import asynccontextmanager
+
+from fastapi import FastAPI
+
+
+async def create_tables():
+    async with async_engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await create_tables()
+    yield
+    await async_engine.dispose()
+
+
+app = FastAPI(lifespan=lifespan)
+```
+
+- `async_engine.begin()`：从连接池取得异步连接并开启事务。
+- `Base.metadata.create_all`：根据所有继承`Base`的模型创建尚不存在的数据表。
+- `run_sync()`：让同步形式的`create_all()`通过异步连接执行。
+- `lifespan`中`yield`之前的代码在应用启动时执行，之后的代码在应用关闭时执行。
+- `async_engine.dispose()`：应用关闭时释放连接池资源。
+
+`create_all()`适合学习阶段首次建表，但不会自动修改已经存在的表结构。正式项目通常使用数据库迁移工具管理表结构变化，这部分后续再学习。
+
+图片中的`@app.on_event("startup")`属于旧的事件写法。当前FastAPI推荐使用`lifespan`统一处理启动和关闭逻辑。
 
 ### 4.3 操作数据
 
@@ -91,11 +200,13 @@ pip install "sqlalchemy[asyncio]" aiomysql
 
 ## 6. 现阶段需要掌握什么
 
-我需要理解ORM的映射关系、为什么使用ORM、SQLAlchemy的定位，以及FastAPI操作数据库的整体流程。数据库连接配置、模型字段、异步会话和CRUD代码是后续需要重点学习的内容；Django ORM和Tortoise ORM现阶段知道它们的定位即可。
+我需要理解ORM的映射关系、为什么使用ORM、SQLAlchemy的定位，以及FastAPI操作数据库的整体流程。目前重点掌握异步引擎、模型类和创建数据表；异步会话和CRUD代码是接下来需要学习的内容。Django ORM和Tortoise ORM现阶段知道它们的定位即可。
 
 ## 7. 官方资料
 
 - [SQLAlchemy ORM快速开始](https://docs.sqlalchemy.org/en/20/orm/quickstart.html)
+- [SQLAlchemy声明式模型与数据表](https://docs.sqlalchemy.org/en/20/orm/declarative_tables.html)
 - [SQLAlchemy asyncio支持](https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html)
+- [FastAPI Lifespan事件](https://fastapi.tiangolo.com/advanced/events/)
 - [Django模型与数据库](https://docs.djangoproject.com/en/5.2/topics/db/)
 - [Tortoise ORM入门](https://tortoise.github.io/getting_started.html)
