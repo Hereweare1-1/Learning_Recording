@@ -116,4 +116,3 @@ exit;
 - [MySQL Community Server 8.4下载](https://dev.mysql.com/downloads/mysql/8.4.html)
 - [MySQL Configurator配置说明](https://dev.mysql.com/doc/refman/8.4/en/mysql-configurator-workflow-server.html)
 - [MySQL字符集和排序规则](https://dev.mysql.com/doc/refman/8.4/en/charset.html)
-
