@@ -70,9 +70,7 @@ pip install "sqlalchemy[asyncio]" aiomysql
 
 学习数据库`fastapi_test`的创建步骤见：[[Windows安装MySQL并创建数据库#4. 创建并检查学习数据库]]。
 
-学习阶段可以通过`Base.metadata.create_all()`创建模型对应的数据表。使用异步连接时，会看到`run_sync(Base.metadata.create_all)`这样的写法。
 
-正式项目还会使用数据库迁移工具管理表结构变化，这部分后续再学习。
 
 ### 4.3 操作数据
 
