@@ -1,6 +1,6 @@
 # Python网络编程与并发基础
 
-这篇笔记先记录网络编程、进程和线程的大概框架。现阶段我只需要理解它们之间的关系，具体用法和代码等学到后再补充。
+这篇笔记先记录网络编程、进程和线程的大概框架。现阶段我先理解它们之间的关系，具体用法和代码按照学习进度逐步补充。
 
 ## 1. 整体关系
 
@@ -34,6 +34,39 @@ Socket网络通信中常见的TCP协议见：[[Web网络基础#7.3 TCP的特点]
 
 > [!note]
 > Socket是网络编程的基础接口；WebSocket是一种具体的应用层通信协议，二者不是同一个概念。
+
+### 2.1 Socket对象
+
+进行Socket通信时，通信双方通常都需要创建自己的Socket对象。可以把Socket对象理解为程序收发网络数据时使用的“通信窗口”。
+
+```text
+客户端程序 → 客户端Socket ⇄ 网络 ⇄ 服务器Socket ← 服务器程序
+```
+
+数据在Socket之间传输时，常见方式有：
+
+- **TCP**：以连续的字节流形式传输数据，适合需要可靠传输的场景。
+- **UDP**：以一个个独立的数据报形式传输数据，传输方式更简单，但不保证数据一定到达。
+
+### 2.2 创建Socket对象
+
+Python使用内置的`socket`模块创建Socket对象：
+
+```python
+import socket
+
+# 创建使用IPv4和TCP协议的Socket对象
+tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# 创建使用IPv4和UDP协议的Socket对象
+udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+```
+
+- `AF_INET`：表示使用IPv4地址。
+- `SOCK_STREAM`：表示使用TCP字节流。
+- `SOCK_DGRAM`：表示使用UDP数据报。
+
+现阶段我先会创建Socket对象；连接服务器、收发数据和关闭Socket等步骤后续再补充。
 
 ## 3. 进程
 
