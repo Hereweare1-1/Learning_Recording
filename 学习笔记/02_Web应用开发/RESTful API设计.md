@@ -6,7 +6,7 @@ RESTful是指遵循REST架构风格的API接口服务。
 
 REST全称为Representational State Transfer，中文为“表述性状态转移”，是一种软件架构风格。
 
-如果还不熟悉URL和HTTP请求方法，可以先查看[[Web网络基础]]。
+如果还不熟悉相关概念，可以先查看[[Web基础概念#4. URL是什么|URL]]和[[HTTP协议#3. HTTP请求|HTTP请求方法]]。
 
 ## 2. RESTful接口设计
 
