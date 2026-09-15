@@ -55,10 +55,14 @@ FastAPI本身没有内置ORM，可以根据项目需求选择数据库工具。�
 
 ### 4.1 安装工具
 
-- 使用SQLAlchemy提供ORM和数据库操作能力。
-- 异步操作MySQL时，还需要`aiomysql`或其他兼容的异步数据库驱动。
+```bash
+pip install "sqlalchemy[asyncio]" aiomysql
+```
 
-具体安装命令等正式学习数据库连接时再补充。
+- `sqlalchemy[asyncio]`：安装SQLAlchemy及其异步功能所需的依赖，用于定义模型和操作数据库。
+- `aiomysql`：MySQL的异步数据库驱动，负责让Python程序通过异步方式连接MySQL。
+
+命令中的引号用于保护`[asyncio]`，避免某些终端把方括号当作特殊字符；它和`pip install sqlalchemy[asyncio] aiomysql`安装的是相同内容。
 
 ### 4.2 建库和建表
 
@@ -93,4 +97,3 @@ FastAPI本身没有内置ORM，可以根据项目需求选择数据库工具。�
 - [SQLAlchemy asyncio支持](https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html)
 - [Django模型与数据库](https://docs.djangoproject.com/en/5.2/topics/db/)
 - [Tortoise ORM入门](https://tortoise.github.io/getting_started.html)
-
