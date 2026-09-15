@@ -64,7 +64,11 @@ pip install "sqlalchemy[asyncio]" aiomysql
 
 命令中的引号用于保护`[asyncio]`，避免某些终端把方括号当作特殊字符；它和`pip install sqlalchemy[asyncio] aiomysql`安装的是相同内容。
 
+这里安装的是Python操作数据库所需的工具。如果电脑还没有安装和初始化MySQL Server，可以查看：[[Windows安装MySQL并创建数据库|Windows安装MySQL与初始化（支线参考）]]。
+
 ### 4.2 建库和建表
+
+学习数据库`fastapi_test`的创建步骤见：[[Windows安装MySQL并创建数据库#4. 创建并检查学习数据库]]。
 
 学习阶段可以通过`Base.metadata.create_all()`创建模型对应的数据表。使用异步连接时，会看到`run_sync(Base.metadata.create_all)`这样的写法。
 
