@@ -47,14 +47,20 @@ D:\MySQL\Server8.4\bin\mysql_configurator.exe
 
 ## 3. 登录MySQL
 
-在PyCharm的PowerShell终端中运行：
+如果MySQL的`bin`目录已经加入系统环境变量`PATH`，可以在PyCharm终端或PowerShell中直接运行：
+
+```bash
+mysql -u root -p
+```
+
+如果终端提示无法识别`mysql`命令，说明当前没有配置对应的`PATH`，可以改用完整路径：
 
 ```bash
 & "D:\MySQL\Server8.4\bin\mysql.exe" -u root -p
 ```
 
 - `&`：让PowerShell运行指定路径中的程序。
-- `mysql.exe`：MySQL命令行客户端。
+- `mysql`或`mysql.exe`：启动MySQL命令行客户端。
 - `-u root`：使用root账户登录。
 - `-p`：登录时提示输入密码。
 
