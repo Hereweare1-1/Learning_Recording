@@ -2,17 +2,17 @@
 
 ## 1. 常用命令速查
 
-| 要做什么 | 命令 | 详细说明 |
-| --- | --- | --- |
-| 查看所有数据库 | `SHOW DATABASES;` | [[#5.1 SHOW DATABASES：查看所有数据库|查看]] |
-| 查看当前数据库 | `SELECT DATABASE();` | [[#5.2 SELECT DATABASE：查看当前数据库|查看]] |
-| 创建数据库 | `CREATE DATABASE 数据库名;` | [[#5.3 CREATE DATABASE：创建数据库|查看]] |
-| 选择数据库 | `USE 数据库名;` | [[#5.4 USE：选择数据库|查看]] |
-| 删除数据库 | `DROP DATABASE 数据库名;` | [[#5.5 DROP DATABASE：删除数据库|查看]] |
-| 创建数据表 | `CREATE TABLE 表名 (...);` | [[#6.1 CREATE TABLE：创建数据表|查看]] |
-| 查看所有表 | `SHOW TABLES;` | [[#6.2 SHOW TABLES：查看所有表|查看]] |
-| 查看表结构 | `DESC 表名;` | [[#6.3 DESC：查看表结构|查看]] |
-| 查看建表语句 | `SHOW CREATE TABLE 表名;` | [[#6.4 SHOW CREATE TABLE：查看建表语句|查看]] |
+| 要做什么    | 命令                       | 详细说明                            |      |
+| ------- | ------------------------ | ------------------------------- | ---- |
+| 查看所有数据库 | `SHOW DATABASES;`        | [[#5.1 SHOW DATABASES：查看所有数据库   | 查看]] |
+| 查看当前数据库 | `SELECT DATABASE();`     | [[#5.2 SELECT DATABASE：查看当前数据库  | 查看]] |
+| 创建数据库   | `CREATE DATABASE 数据库名;`  | [[#5.3 CREATE DATABASE：创建数据库    | 查看]] |
+| 选择数据库   | `USE 数据库名;`              | [[#5.4 USE：选择数据库                | 查看]] |
+| 删除数据库   | `DROP DATABASE 数据库名;`    | [[#5.5 DROP DATABASE：删除数据库      | 查看]] |
+| 创建数据表   | `CREATE TABLE 表名 (...);` | [[#6.1 CREATE TABLE：创建数据表       | 查看]] |
+| 查看所有表   | `SHOW TABLES;`           | [[#6.2 SHOW TABLES：查看所有表        | 查看]] |
+| 查看表结构   | `DESC 表名;`               | [[#6.3 DESC：查看表结构               | 查看]] |
+| 查看建表语句  | `SHOW CREATE TABLE 表名;`  | [[#6.4 SHOW CREATE TABLE：查看建表语句 | 查看]] |
 
 ## 2. SQL语句的基本书写规则
 
