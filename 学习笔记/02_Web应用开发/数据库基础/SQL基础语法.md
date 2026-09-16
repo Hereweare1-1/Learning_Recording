@@ -2,17 +2,33 @@
 
 ## 1. 常用命令速查
 
-| 要做什么    | 命令                       | 详细说明                            |      |
-| ------- | ------------------------ | ------------------------------- | ---- |
-| 查看所有数据库 | `SHOW DATABASES;`        | [[#5.1 SHOW DATABASES：查看所有数据库   | 查看]] |
-| 查看当前数据库 | `SELECT DATABASE();`     | [[#5.2 SELECT DATABASE：查看当前数据库  | 查看]] |
-| 创建数据库   | `CREATE DATABASE 数据库名;`  | [[#5.3 CREATE DATABASE：创建数据库    | 查看]] |
-| 选择数据库   | `USE 数据库名;`              | [[#5.4 USE：选择数据库                | 查看]] |
-| 删除数据库   | `DROP DATABASE 数据库名;`    | [[#5.5 DROP DATABASE：删除数据库      | 查看]] |
-| 创建数据表   | `CREATE TABLE 表名 (...);` | [[#6.1 CREATE TABLE：创建数据表       | 查看]] |
-| 查看所有表   | `SHOW TABLES;`           | [[#6.2 SHOW TABLES：查看所有表        | 查看]] |
-| 查看表结构   | `DESC 表名;`               | [[#6.3 DESC：查看表结构               | 查看]] |
-| 查看建表语句  | `SHOW CREATE TABLE 表名;`  | [[#6.4 SHOW CREATE TABLE：查看建表语句 | 查看]] |
+为了避免在Obsidian表格中显示失效的内部链接，这里直接列出命令。需要详细说明时，可以通过右侧大纲点击后面的同名标题。
+
+### 1.1 对数据库进行操作
+
+| 作用 | 命令 |
+| --- | --- |
+| 查看所有数据库 | `SHOW DATABASES;` |
+| 查看当前数据库 | `SELECT DATABASE();` |
+| 创建数据库 | `CREATE DATABASE 数据库名;` |
+| 选择数据库 | `USE 数据库名;` |
+| 删除数据库 | `DROP DATABASE 数据库名;` |
+
+### 1.2 对数据表进行操作
+
+| 作用 | 命令 |
+| --- | --- |
+| 创建数据表 | `CREATE TABLE 表名 (...);` |
+| 查看所有表 | `SHOW TABLES;` |
+| 查看表结构 | `DESC 表名;` |
+| 查看建表语句 | `SHOW CREATE TABLE 表名;` |
+| 添加字段 | `ALTER TABLE 表名 ADD 字段名 数据类型;` |
+| 修改字段类型 | `ALTER TABLE 表名 MODIFY 字段名 新数据类型;` |
+| 修改字段名和类型 | `ALTER TABLE 表名 CHANGE 旧字段名 新字段名 数据类型;` |
+| 删除字段 | `ALTER TABLE 表名 DROP COLUMN 字段名;` |
+| 修改表名 | `ALTER TABLE 表名 RENAME TO 新表名;` |
+| 删除整张表 | `DROP TABLE 表名;` |
+| 清空表中全部数据 | `TRUNCATE TABLE 表名;` |
 
 ## 2. SQL语句的基本书写规则
 
@@ -238,6 +254,117 @@ SHOW CREATE TABLE employee;
 
 这个命令可以查看MySQL实际保存的建表语句，包括自动补充的默认配置。
 
+### 6.5 ALTER TABLE ADD：添加字段
+
+```text
+ALTER TABLE 表名
+ADD 字段名 数据类型 [(长度)] [COMMENT '注释'] [约束];
+```
+
+方括号中的长度、注释和约束可以省略，实际输入时不写方括号。数据类型是否需要长度，要根据具体类型决定。
+
+例如，给员工表添加年龄字段：
+
+```sql
+ALTER TABLE employee
+ADD age TINYINT UNSIGNED COMMENT '年龄';
+```
+
+### 6.6 ALTER TABLE MODIFY：修改字段类型
+
+```text
+ALTER TABLE 表名
+MODIFY 字段名 新数据类型 [(长度)];
+```
+
+例如，把员工姓名允许的最大长度改为100：
+
+```sql
+ALTER TABLE employee
+MODIFY name VARCHAR(100);
+```
+
+`MODIFY`只修改字段定义，不修改字段名称。修改类型前要确认已有数据能够转换成新类型。
+
+### 6.7 ALTER TABLE CHANGE：修改字段名和类型
+
+```text
+ALTER TABLE 表名
+CHANGE 旧字段名 新字段名 数据类型 [(长度)] [COMMENT '注释'] [约束];
+```
+
+例如，把`job`字段改名为`position`，并重新声明其完整类型：
+
+```sql
+ALTER TABLE employee
+CHANGE job position VARCHAR(50) COMMENT '职位';
+```
+
+使用`CHANGE`时，即使只想修改字段名，也需要重新写出字段的数据类型。
+
+### 6.8 ALTER TABLE DROP COLUMN：删除字段
+
+```text
+ALTER TABLE 表名 DROP COLUMN 字段名;
+```
+
+例如：
+
+```sql
+ALTER TABLE employee DROP COLUMN age;
+```
+
+> [!warning]
+> 删除字段会同时删除该字段中的全部数据，执行前需要确认字段名并备份重要数据。
+
+### 6.9 ALTER TABLE RENAME TO：修改表名
+
+```text
+ALTER TABLE 旧表名 RENAME TO 新表名;
+```
+
+例如：
+
+```sql
+ALTER TABLE employee RENAME TO employees;
+```
+
+### 6.10 DROP TABLE：删除整张表
+
+```text
+DROP TABLE [IF EXISTS] 表名;
+```
+
+例如：
+
+```sql
+DROP TABLE IF EXISTS employees;
+```
+
+`IF EXISTS`可以省略。`DROP TABLE`会同时删除表结构和表中的全部数据。
+
+### 6.11 TRUNCATE TABLE：清空表中全部数据
+
+```text
+TRUNCATE TABLE 表名;
+```
+
+例如：
+
+```sql
+TRUNCATE TABLE employee;
+```
+
+`TRUNCATE TABLE`会快速清空表中的全部数据，但执行后同名的空表仍然存在，可以继续插入数据。在MySQL中，它在逻辑上接近删除并重新创建该表，因此属于DDL，并且通常不能回滚。
+
+| 命令 | 删除数据 | 删除表结构 | 当前阶段的理解 |
+| --- | --- | --- | --- |
+| `DROP TABLE 表名;` | 是 | 是 | 整张表都不要了 |
+| `TRUNCATE TABLE 表名;` | 是，删除全部数据 | 否 | 保留空表，重新开始使用 |
+
+> [!warning]
+> `DROP TABLE`和`TRUNCATE TABLE`都会造成数据丢失，练习时也要先确认当前数据库和表名。
+
 ## 7. DML数据操作
 
 ### 7.1 INSERT：新增数据
@@ -262,6 +389,13 @@ FROM employee;
 
 ## 9. 当前需要掌握什么
 
-我需要掌握SQL语句的分号、缩进、大小写习惯和三种注释写法，能够区分DDL、DML和DQL，并会使用DDL相关命令查询、创建、选择和谨慎删除数据库。DCL和TCL现阶段知道用途即可，等学习用户权限和事务时再深入。
+我需要掌握SQL语句的分号、缩进、大小写习惯和三种注释写法，能够区分DDL、DML和DQL，并做到：
+
+- 会查询、创建、选择和谨慎删除数据库。
+- 会创建和查询数据表。
+- 会使用`ALTER TABLE`添加、修改、重命名和删除字段。
+- 能区分`DROP TABLE`删除整张表与`TRUNCATE TABLE`清空全部数据。
+
+DCL和TCL现阶段知道用途即可，等学习用户权限和事务时再深入。
 
 返回：[[数据库学习导航]]。
