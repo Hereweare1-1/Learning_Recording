@@ -1,6 +1,6 @@
-# Windows安装MySQL并创建数据库
+# Windows下载、安装与登录MySQL
 
-这篇笔记是数据库环境准备参考，只在首次安装或重新配置MySQL时查看，不需要反复背诵安装向导。
+这篇笔记是Windows上的MySQL环境准备参考，只在首次下载、安装、重新配置或登录MySQL时查看，不需要反复背诵安装向导。
 
 ## 1. 下载MySQL
 
@@ -45,7 +45,7 @@ D:\MySQL\Server8.4\bin\mysql_configurator.exe
 
 最后执行配置，确认所有项目完成并出现`Configuration Complete`。
 
-## 3. 登录MySQL
+## 3. 登录和退出MySQL
 
 如果MySQL的`bin`目录已经加入系统环境变量`PATH`，可以在PyCharm终端或PowerShell中直接运行：
 
@@ -66,59 +66,18 @@ mysql -u root -p
 
 看到`Enter password:`后输入安装时设置的密码。输入过程中不显示字符属于正常现象，登录成功后会出现`mysql>`。
 
-## 4. 创建并检查学习数据库
-
-登录后依次执行：
+需要退出MySQL命令行客户端时运行：
 
 ```sql
-SHOW DATABASES;
-
-CREATE DATABASE fastapi_test
-CHARACTER SET utf8mb4
-COLLATE utf8mb4_unicode_ci;
-
-USE fastapi_test;
-
-SHOW TABLES;
-
 exit;
 ```
-
-| 命令 | 作用 |
-| --- | --- |
-| `SHOW DATABASES;` | 查看当前账户能够看到的数据库 |
-| `CREATE DATABASE ...;` | 创建名为`fastapi_test`的学习数据库 |
-| `USE fastapi_test;` | 选择后续需要操作的数据库 |
-| `SHOW TABLES;` | 查看当前数据库中的数据表 |
-| `exit;` | 退出MySQL命令行客户端 |
-
-新安装的MySQL通常包含`information_schema`、`mysql`、`performance_schema`和`sys`等系统数据库，不要随意修改或删除。
-
-`utf8mb4`支持中文、英文和Emoji。这里使用的`utf8mb4_unicode_ci`是有效的排序规则；MySQL 8.4默认排序规则是`utf8mb4_0900_ai_ci`，两者不要混淆。
-
-刚创建的`fastapi_test`还没有数据表，因此`SHOW TABLES;`显示`Empty set`是正常现象，后续可以使用SQLAlchemy ORM创建表。
-
-## 5. 与FastAPI ORM学习的关系
-
-```text
-安装并启动MySQL Server
-        ↓
-创建fastapi_test数据库
-        ↓
-使用aiomysql连接MySQL
-        ↓
-使用SQLAlchemy定义并创建数据表
-```
-
-完成本篇操作后，回到[[数据库学习导航]]继续学习SQL；以后在FastAPI项目中使用数据库时，再学习[[FastAPI数据库与ORM]]。
-
-## 6. 安全提示
 
 > [!warning]
 > 本机学习阶段可以暂时使用root账户。正式项目应创建权限受限的应用账户，不要把root密码或其他数据库密码直接写入代码、笔记或Git仓库。
 
-## 7. 官方资料
+完成登录后，回到[[数据库学习导航]]继续学习SQL。
+
+## 4. 官方资料
 
 - [MySQL Community Server 8.4下载](https://dev.mysql.com/downloads/mysql/8.4.html)
 - [MySQL Configurator配置说明](https://dev.mysql.com/doc/refman/8.4/en/mysql-configurator-workflow-server.html)
-- [MySQL字符集和排序规则](https://dev.mysql.com/doc/refman/8.4/en/charset.html)

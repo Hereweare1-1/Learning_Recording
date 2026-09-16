@@ -38,7 +38,11 @@ FastAPI本身没有内置ORM，可以根据项目需求选择数据库工具。�
 ## 4. FastAPI操作数据库的整体流程
 
 ```text
-安装ORM和数据库驱动
+安装并启动MySQL Server
+        ↓
+创建项目数据库
+        ↓
+安装SQLAlchemy和aiomysql
         ↓
 配置数据库连接和会话
         ↓
@@ -64,11 +68,11 @@ pip install "sqlalchemy[asyncio]" aiomysql
 
 命令中的引号用于保护`[asyncio]`，避免某些终端把方括号当作特殊字符；它和`pip install sqlalchemy[asyncio] aiomysql`安装的是相同内容。
 
-这里安装的是Python操作数据库所需的工具。如果电脑还没有安装和初始化MySQL Server，可以查看：[[Windows安装MySQL并创建数据库|Windows安装MySQL与初始化（支线参考）]]。
+这里安装的是Python操作数据库所需的工具。如果电脑还没有安装和登录MySQL Server，可以查看：[[Windows下载、安装与登录MySQL]]。
 
 ### 4.2 建库和建表
 
-学习数据库`fastapi_test`的创建步骤见：[[Windows安装MySQL并创建数据库#4. 创建并检查学习数据库]]。
+学习数据库`fastapi_test`的创建步骤见：[[DDL数据库与表结构操作#3.3 CREATE DATABASE：创建数据库]]。
 
 使用ORM创建表的顺序是：
 

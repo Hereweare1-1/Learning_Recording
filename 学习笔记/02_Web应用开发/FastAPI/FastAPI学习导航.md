@@ -14,7 +14,7 @@ FastAPI介绍 → FastAPI快速入门 → FastAPI路由 → FastAPI请求参数 
 4. [[FastAPI请求参数]]：学习路径参数、查询参数、`Path()`、`Query()`和请求体。
 5. [[FastAPI依赖注入]]：使用`Depends`复用公共逻辑并为路由提供数据。
 6. [[FastAPI数据库与ORM]]：理解ORM并学习FastAPI操作数据库的整体流程。
-   - 环境准备支线：[[Windows安装MySQL并创建数据库|Windows安装MySQL与初始化]]。
+   - 环境准备支线：[[Windows下载、安装与登录MySQL]]。
 7. [[FastAPI响应模型]]：使用`response_model`约束JSON响应的数据结构。
 8. [[FastAPI响应类型]]：重点掌握JSON、HTML和文件三种响应。
 9. [[FastAPI异常处理]]：使用`HTTPException`返回明确的HTTP错误。
