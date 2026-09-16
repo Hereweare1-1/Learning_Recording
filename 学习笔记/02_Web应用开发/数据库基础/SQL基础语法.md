@@ -76,13 +76,100 @@ SELECT * FROM employee WHERE dept_id = 1;
 
 ### 3.1 DDL：定义数据结构
 
+DDL操作的是数据库和数据表的结构，而不是表中的某一条具体数据。
+
+**如何阅读语法格式**
+
+```text
+CREATE DATABASE [IF NOT EXISTS] 数据库名
+    [DEFAULT CHARACTER SET 字符集]
+    [COLLATE 排序规则];
+```
+
+- 方括号`[]`中的内容表示**可以省略的可选部分**。
+- 实际输入SQL时，不要把方括号本身写进去。
+- `数据库名`、`字符集`和`排序规则`是占位说明，需要替换成实际值。
+
+最简写法：
+
 ```sql
 CREATE DATABASE demo;
 ```
 
-DDL操作的是数据库和数据表的结构，而不是表中的某一条具体数据。
+包含可选部分的写法：
 
-数据库的查询、创建、选择和删除见：[[MySQL数据库操作]]。
+```sql
+CREATE DATABASE IF NOT EXISTS demo
+DEFAULT CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+```
+
+**查询数据库**
+
+查询当前账户能够看到的数据库：
+
+```sql
+SHOW DATABASES;
+```
+
+查询当前正在使用的数据库：
+
+```sql
+SELECT DATABASE();
+```
+
+如果还没有使用`USE`选择数据库，`SELECT DATABASE()`通常返回`NULL`。
+
+**创建数据库**
+
+```text
+CREATE DATABASE [IF NOT EXISTS] 数据库名
+    [DEFAULT CHARACTER SET 字符集]
+    [COLLATE 排序规则];
+```
+
+- `IF NOT EXISTS`：数据库不存在时才创建，避免数据库已经存在时报错。
+- `DEFAULT CHARACTER SET`：指定数据库的默认字符集。
+- `COLLATE`：指定数据库的默认排序和比较规则。
+
+学习示例：
+
+```sql
+CREATE DATABASE IF NOT EXISTS fastapi_test
+DEFAULT CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+```
+
+**删除数据库**
+
+```text
+DROP DATABASE [IF EXISTS] 数据库名;
+```
+
+`IF EXISTS`表示数据库存在时才删除，也可以省略。
+
+```sql
+DROP DATABASE IF EXISTS demo;
+```
+
+> [!warning]
+> `DROP DATABASE`会删除整个数据库以及其中的数据表和数据。执行前必须确认数据库名称，并确保重要数据已经备份。
+
+**选择数据库**
+
+```text
+USE 数据库名;
+```
+
+例如：
+
+```sql
+USE fastapi_test;
+```
+
+选择数据库后，后续没有明确写出数据库名的建表和查询操作，会默认在当前数据库中执行。重新连接MySQL后，通常需要再次使用`USE`选择数据库。
+
+这组命令通常放在“DDL数据库操作”中一起学习。其中`CREATE DATABASE`和`DROP DATABASE`属于DDL；`SHOW DATABASES`、`SELECT DATABASE()`和`USE`是配套使用的查询或切换命令。
 
 ### 3.2 DML：修改数据
 
@@ -104,6 +191,6 @@ FROM employee;
 
 ## 4. 当前需要掌握什么
 
-我需要掌握SQL语句的分号、缩进、大小写习惯和三种注释写法，并能够区分DDL、DML和DQL。DCL和TCL现阶段知道用途即可，等学习用户权限和事务时再深入。
+我需要掌握SQL语句的分号、缩进、大小写习惯和三种注释写法，能够区分DDL、DML和DQL，并会使用DDL相关命令查询、创建、选择和谨慎删除数据库。DCL和TCL现阶段知道用途即可，等学习用户权限和事务时再深入。
 
 返回：[[数据库学习导航]]。
