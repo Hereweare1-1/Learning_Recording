@@ -171,6 +171,73 @@ USE fastapi_test;
 
 这组命令通常放在“DDL数据库操作”中一起学习。其中`CREATE DATABASE`和`DROP DATABASE`属于DDL；`SHOW DATABASES`、`SELECT DATABASE()`和`USE`是配套使用的查询或切换命令。
 
+**表操作：创建表**
+
+创建表之前，需要先使用`USE`选择数据库。
+
+```text
+CREATE TABLE 表名 (
+    字段1 字段类型 [COMMENT '字段1注释'],
+    字段2 字段类型 [COMMENT '字段2注释'],
+    ...
+    字段n 字段类型 [COMMENT '字段n注释']
+) [COMMENT '表注释'];
+```
+
+- 方括号中的`COMMENT`属于可选内容，可以省略，实际输入时不写方括号。
+- 每个字段之间使用逗号分隔。
+- **最后一个字段后面不能写逗号**，否则会出现SQL语法错误。
+- 字段注释和表注释需要使用引号包住具体内容。
+
+例如，创建员工表：
+
+```sql
+CREATE TABLE employee (
+    id INT COMMENT '员工编号',
+    name VARCHAR(50) COMMENT '员工姓名',
+    job VARCHAR(50) COMMENT '职位',
+    dept_id INT COMMENT '部门编号'
+) COMMENT '员工表';
+```
+
+这个例子暂时只演示表名、字段名、字段类型和注释。主键、非空和默认值等约束后续再学习。
+
+**表操作：查询表**
+
+查询当前数据库中的所有表：
+
+```sql
+SHOW TABLES;
+```
+
+查询指定表的字段结构：
+
+```text
+DESC 表名;
+```
+
+例如：
+
+```sql
+DESC employee;
+```
+
+`DESC`是`DESCRIBE`的简写，可以查看字段名、字段类型、是否允许为空和键信息等表结构。
+
+查询指定表的完整建表语句：
+
+```text
+SHOW CREATE TABLE 表名;
+```
+
+例如：
+
+```sql
+SHOW CREATE TABLE employee;
+```
+
+这个命令可以查看MySQL实际保存的建表语句，包括自动补充的默认配置。
+
 ### 3.2 DML：修改数据
 
 ```sql
