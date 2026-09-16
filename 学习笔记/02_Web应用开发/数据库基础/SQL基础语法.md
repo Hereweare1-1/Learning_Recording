@@ -6,13 +6,13 @@
 
 ### 1.1 对数据库进行操作
 
-| 作用 | 命令 |
-| --- | --- |
-| 查看所有数据库 | `SHOW DATABASES;` |
-| 查看当前数据库 | `SELECT DATABASE();` |
-| 创建数据库 | `CREATE DATABASE 数据库名;` |
-| 选择数据库 | `USE 数据库名;` |
-| 删除数据库 | `DROP DATABASE 数据库名;` |
+| 作用      | 命令                      |
+| ------- | ----------------------- |
+| 查看所有数据库 | `SHOW DATABASES;`       |
+| 查看当前数据库 | `SELECT DATABASE();`    |
+| 创建数据库   | `CREATE DATABASE 数据库名;` |
+| 选择数据库   | `USE 数据库名;`             |
+| 删除数据库   | `DROP DATABASE 数据库名;`   |
 
 ### 1.2 对数据表进行操作
 
