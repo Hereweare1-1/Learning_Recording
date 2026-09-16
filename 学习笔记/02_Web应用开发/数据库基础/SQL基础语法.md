@@ -96,13 +96,13 @@ SELECT * FROM employee WHERE dept_id = 1;
 
 不同资料对SQL分类的范围可能略有差异，现阶段可以按照下面的常见分类理解：
 
-| 分类 | 全称 | 主要作用 | 常见关键字 | 学习要求 |
-| --- | --- | --- | --- | --- |
-| DDL | Data Definition Language | 定义数据库、表和字段等对象 | `CREATE`、`ALTER`、`DROP` | **重点掌握** |
-| DML | Data Manipulation Language | 新增、修改和删除表中的数据 | `INSERT`、`UPDATE`、`DELETE` | **重点掌握** |
-| DQL | Data Query Language | 查询表中的数据 | `SELECT` | **重点掌握** |
-| DCL | Data Control Language | 管理用户和访问权限 | `GRANT`、`REVOKE` | 了解即可 |
-| TCL | Transaction Control Language | 控制事务的提交和回滚 | `COMMIT`、`ROLLBACK` | 先了解，学习事务时再掌握 |
+| 分类  | 全称                           | 主要作用          | 常见关键字                      | 学习要求         |
+| --- | ---------------------------- | ------------- | -------------------------- | ------------ |
+| DDL | Data Definition Language     | 定义数据库、表和字段等对象 | `CREATE`、`ALTER`、`DROP`    | **重点掌握**     |
+| DML | Data Manipulation Language   | 新增、修改和删除表中的数据 | `INSERT`、`UPDATE`、`DELETE` | **重点掌握**     |
+| DQL | Data Query Language          | 查询表中的数据       | `SELECT`                   | **重点掌握**     |
+| DCL | Data Control Language        | 管理用户和访问权限     | `GRANT`、`REVOKE`           | 了解即可         |
+| TCL | Transaction Control Language | 控制事务的提交和回滚    | `COMMIT`、`ROLLBACK`        | 先了解，学习事务时再掌握 |
 
 ## 5. DDL数据库操作
 
