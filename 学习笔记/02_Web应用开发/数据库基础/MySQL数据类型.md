@@ -30,8 +30,8 @@ Python的`int`不会因为MySQL使用不同整数类型而改变，MySQL类型�
 | `DOUBLE` | 8字节 | 双精度近似小数 | `float` | 会用 |
 | `DECIMAL(M,D)` | 由精度决定 | 精确小数 | `decimal.Decimal` | **重点掌握** |
 
-- **精度（M）**：一共可以保存多少位数字。
-- **标度（D）**：其中有多少位是小数位。
+- **精度（M）**：一共可以保存多少位数字，不计算负号和小数点。
+- **标度（D）**：总位数中有多少位是小数位。
 
 例如：
 
@@ -96,11 +96,11 @@ username VARCHAR(50)
 
 | MySQL类型 | 常见格式或范围 | 主要用途 | Python常用类型 | 当前要求 |
 | --- | --- | --- | --- | --- |
-| `DATE` | `YYYY-MM-DD` | 日期 | `datetime.date` | 会用 |
+| `DATE` | `1000-01-01`～`9999-12-31` | 日期，格式为`YYYY-MM-DD` | `datetime.date` | 会用 |
 | `TIME` | `-838:59:59`～`838:59:59` | 时间或持续时长 | `datetime.timedelta` | 了解 |
-| `YEAR` | 年份 | 年份值 | `int` | 了解 |
-| `DATETIME` | `YYYY-MM-DD HH:MM:SS` | 日期和时间 | `datetime.datetime` | **重点掌握** |
-| `TIMESTAMP` | `YYYY-MM-DD HH:MM:SS` | 时间戳，常用于创建和修改时间 | `datetime.datetime` | **重点掌握** |
+| `YEAR` | `1901`～`2155`，还可以保存`0000` | 年份值，格式为`YYYY` | `int` | 了解 |
+| `DATETIME` | `1000-01-01 00:00:00`～`9999-12-31 23:59:59` | 日期和时间 | `datetime.datetime` | **重点掌握** |
+| `TIMESTAMP` | `1970-01-01 00:00:01` UTC～`2038-01-19 03:14:07` UTC | 时间戳，常用于创建和修改时间 | `datetime.datetime` | **重点掌握** |
 
 `DATETIME`保存的日期范围更广；`TIMESTAMP`范围较小，并会结合会话时区进行转换。初学阶段先会根据字段用途选择，不展开时区和自动更新时间的细节。
 
