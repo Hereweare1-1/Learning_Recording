@@ -27,8 +27,6 @@ AI模型或业务功能
 前端、智能体或其他程序调用
 ```
 
-FastAPI、Flask和Django适合解决的问题不同，具体区别见[[Python Web框架对比]]。
-
 ## 4. 官方资料
 
 - [FastAPI官方文档](https://fastapi.tiangolo.com/)
