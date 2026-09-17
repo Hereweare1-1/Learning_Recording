@@ -6,29 +6,29 @@ DDL（Data Definition Language，数据定义语言）主要用于定义和修�
 
 ### 1.1 数据库操作
 
-| 作用 | 语句 |
-| --- | --- |
-| 查看所有数据库 | `SHOW DATABASES;` |
-| 查看当前数据库 | `SELECT DATABASE();` |
-| 创建数据库 | `CREATE DATABASE 数据库名;` |
-| 选择数据库 | `USE 数据库名;` |
-| 删除数据库 | `DROP DATABASE 数据库名;` |
+| 作用      | 语句                      |
+| ------- | ----------------------- |
+| 查看所有数据库 | `SHOW DATABASES;`       |
+| 查看当前数据库 | `SELECT DATABASE();`    |
+| 创建数据库   | `CREATE DATABASE 数据库名;` |
+| 选择数据库   | `USE 数据库名;`             |
+| 删除数据库   | `DROP DATABASE 数据库名;`   |
 
 ### 1.2 数据表操作
 
-| 作用 | 语句 |
-| --- | --- |
-| 创建数据表 | `CREATE TABLE 表名 (...);` |
-| 查看所有表 | `SHOW TABLES;` |
-| 查看表结构 | `DESC 表名;` |
-| 查看建表语句 | `SHOW CREATE TABLE 表名;` |
-| 添加字段 | `ALTER TABLE 表名 ADD 字段名 数据类型;` |
-| 修改字段类型 | `ALTER TABLE 表名 MODIFY 字段名 新数据类型;` |
+| 作用       | 语句                                      |
+| -------- | --------------------------------------- |
+| 创建数据表    | `CREATE TABLE 表名 (...);`                |
+| 查看所有表    | `SHOW TABLES;`                          |
+| 查看表结构    | `DESC 表名;`                              |
+| 查看建表语句   | `SHOW CREATE TABLE 表名;`                 |
+| 添加字段     | `ALTER TABLE 表名 ADD 字段名 数据类型;`          |
+| 修改字段类型   | `ALTER TABLE 表名 MODIFY 字段名 新数据类型;`      |
 | 修改字段名和类型 | `ALTER TABLE 表名 CHANGE 旧字段名 新字段名 数据类型;` |
-| 删除字段 | `ALTER TABLE 表名 DROP COLUMN 字段名;` |
-| 修改表名 | `ALTER TABLE 旧表名 RENAME TO 新表名;` |
-| 删除整张表 | `DROP TABLE 表名;` |
-| 清空表中全部数据 | `TRUNCATE TABLE 表名;` |
+| 删除字段     | `ALTER TABLE 表名 DROP COLUMN 字段名;`       |
+| 修改表名     | `ALTER TABLE 旧表名 RENAME TO 新表名;`        |
+| 删除整张表    | `DROP TABLE 表名;`                        |
+| 清空表中全部数据 | `TRUNCATE TABLE 表名;`                    |
 
 ## 2. 语法说明
 
