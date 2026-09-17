@@ -178,7 +178,64 @@ WHERE age BETWEEN 18 AND 35
 
 多个逻辑运算符同时出现时，可以使用圆括号明确条件的组合顺序。
 
-## 5. 相关笔记
+## 5. 聚合函数
+
+聚合函数把一列中的多条数据作为一个整体进行计算，并返回一个统计结果。
+
+### 5.1 常见聚合函数
+
+| 函数 | 作用 |
+| --- | --- |
+| `COUNT()` | 统计数量 |
+| `MAX()` | 计算最大值 |
+| `MIN()` | 计算最小值 |
+| `AVG()` | 计算平均值 |
+| `SUM()` | 计算总和 |
+
+### 5.2 基本语法
+
+```text
+SELECT 聚合函数(字段)
+FROM 表名
+[WHERE 条件];
+```
+
+方括号表示`WHERE`条件可以省略，实际SQL中不写方括号。
+
+例如，统计员工总数：
+
+```sql
+SELECT COUNT(*) AS employee_count
+FROM employee;
+```
+
+计算员工的最高年龄、最低年龄、平均年龄和年龄总和：
+
+```sql
+SELECT
+    MAX(age) AS max_age,
+    MIN(age) AS min_age,
+    AVG(age) AS avg_age,
+    SUM(age) AS total_age
+FROM employee;
+```
+
+### 5.3 COUNT的两种常见写法
+
+- `COUNT(*)`：统计查询结果中的记录总数。
+- `COUNT(字段)`：统计该字段不为`NULL`的记录数量。
+
+`MAX()`、`MIN()`、`AVG()`和`SUM()`在计算时也会忽略值为`NULL`的记录。
+
+聚合函数可以和`WHERE`组合，先筛选记录，再进行统计：
+
+```sql
+SELECT COUNT(*) AS developer_count
+FROM employee
+WHERE job = '开发';
+```
+
+## 6. 相关笔记
 
 - [[SQL基础语法]]
 - [[数据库学习导航]]
