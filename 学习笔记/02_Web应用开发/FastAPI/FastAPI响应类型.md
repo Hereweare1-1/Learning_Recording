@@ -1,6 +1,6 @@
 # FastAPI响应类型
 
-FastAPI接口处理完请求后，需要把结果返回给客户端。现阶段我重点掌握三种常用响应：**JSON、HTML和文件**。
+FastAPI接口处理完请求后，需要把结果返回给客户端。常用的响应内容包括JSON、HTML和文件。
 
 | 响应内容 | 常用方式 | 适合场景 |
 | --- | --- | --- |
@@ -12,7 +12,7 @@ FastAPI接口处理完请求后，需要把结果返回给客户端。现阶段�
 
 JSON是FastAPI默认使用的响应格式。路径操作函数返回字典、列表或Pydantic模型时，FastAPI会自动把Python对象转换成JSON响应，一般不需要手动创建`JSONResponse`。
 
-转换过程中会用到`jsonable_encoder`。现阶段可以把它简单理解为“把Python对象整理成能够写入JSON的数据”的转换工具，不需要手动调用它。
+转换过程中会用到`jsonable_encoder`，它负责把Python对象整理成能够写入JSON的数据，普通响应通常不需要手动调用。
 
 ```python
 from fastapi import FastAPI
@@ -78,7 +78,7 @@ async def get_html():
     return HTMLResponse(content=html_content)
 ```
 
-两种写法都能返回HTML。现阶段可以优先使用第一种，因为装饰器直接说明了该接口的响应类型，看起来更直观。
+两种写法都能返回HTML。装饰器声明`response_class`的方式可以直接显示接口响应类型，结构更加直观。
 
 ## 3. 文件响应
 
@@ -106,9 +106,9 @@ async def get_file():
 - 文件必须真实存在，否则接口会报错。
 - 项目中优先使用相对路径，避免把某台电脑独有的绝对路径写死在代码中。
 
-## 4. 其他响应类型（了解）
+## 4. 其他响应类型
 
-除了JSON、HTML和文件响应，FastAPI还提供下面这些响应类型。现阶段知道它们是做什么的即可，不需要展开学习。
+除了JSON、HTML和文件响应，FastAPI还提供纯文本、重定向和流式响应等类型。
 
 | 响应类型 | 作用 |
 | --- | --- |
@@ -127,8 +127,6 @@ async def get_file():
     ↓
 直接返回HTMLResponse或FileResponse对象
 ```
-
-现阶段我只需要重点掌握：普通API直接返回JSON数据，网页内容使用`HTMLResponse`，文件下载使用`FileResponse`。
 
 ## 6. 官方资料
 

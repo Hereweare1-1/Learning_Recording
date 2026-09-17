@@ -57,11 +57,6 @@ async def log_middleware(request: Request, call_next):
 > [!tip] 简单记忆
 > `call_next()`之前处理请求，`call_next()`之后处理响应。
 
-## 4. 现阶段需要掌握什么
-
-我需要理解中间件会统一处理请求和响应，能够看懂并写出上面的基本结构。多个中间件的执行顺序、自定义ASGI中间件等高级内容，现阶段了解即可，不需要展开。
-
-## 5. 官方资料
+## 4. 官方资料
 
 - [FastAPI中间件](https://fastapi.tiangolo.com/tutorial/middleware/)
-

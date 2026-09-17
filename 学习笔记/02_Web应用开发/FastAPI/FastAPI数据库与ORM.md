@@ -1,6 +1,6 @@
 # FastAPI数据库与ORM
 
-这篇笔记整理ORM和FastAPI操作数据库的整体流程。现阶段我先掌握异步引擎、模型类和创建表，具体的增删改查代码后续再补充。
+这篇笔记整理ORM概念，以及FastAPI通过异步引擎、模型类和数据库会话操作数据库的整体流程。
 
 ## 1. ORM是什么
 
@@ -27,13 +27,13 @@ ORM不会让SQL完全消失。遇到复杂查询、性能优化和排查问题�
 
 这里不进行主观排名，只根据框架关系和我的学习方向选择重点。
 
-| ORM工具          | 特点和适用场景                         | 当前学习要求   |
-| -------------- | ------------------------------- | -------- |
-| SQLAlchemy ORM | 独立、功能完整，同时支持同步和异步用法，常与FastAPI配合 | **重点学习** |
-| Django ORM     | Django内置的ORM，与Django项目结合紧密      | 了解即可     |
-| Tortoise ORM   | 采用异步风格，API相对直观                  | 了解即可     |
+| ORM工具 | 特点和适用场景 |
+| --- | --- |
+| SQLAlchemy ORM | 独立、功能完整，同时支持同步和异步用法，常与FastAPI配合 |
+| Django ORM | Django内置的ORM，与Django项目结合紧密 |
+| Tortoise ORM | 采用异步风格，API相对直观 |
 
-FastAPI本身没有内置ORM，可以根据项目需求选择数据库工具。对当前的智能应用开发方向，我优先学习SQLAlchemy。
+FastAPI本身没有内置ORM，可以根据项目需求选择数据库工具。SQLAlchemy功能完整并支持异步用法，是FastAPI项目中的常见选择。
 
 ## 4. FastAPI操作数据库的整体流程
 
@@ -110,7 +110,7 @@ mysql+aiomysql://用户名:密码@localhost:3306/fastapi_test?charset=utf8mb4
 - `pool_size`：连接池中长期保留的连接数量。
 - `max_overflow`：连接池繁忙时允许临时增加的连接数量。
 
-学习小项目可以暂时省略`pool_size`和`max_overflow`，先使用默认值。数据库地址通过环境变量读取，避免把真实密码直接写进代码和Git仓库。
+小型项目可以省略`pool_size`和`max_overflow`并使用默认值。数据库地址通过环境变量读取，避免把真实密码直接写进代码和Git仓库。
 
 **第二步：定义模型类**
 
@@ -202,11 +202,7 @@ app = FastAPI(lifespan=lifespan)
 
 依赖注入的基础内容见：[[FastAPI依赖注入]]。
 
-## 6. 现阶段需要掌握什么
-
-我需要理解ORM的映射关系、为什么使用ORM、SQLAlchemy的定位，以及FastAPI操作数据库的整体流程。目前重点掌握异步引擎、模型类和创建数据表；异步会话和CRUD代码是接下来需要学习的内容。Django ORM和Tortoise ORM现阶段知道它们的定位即可。
-
-## 7. 官方资料
+## 6. 官方资料
 
 - [SQLAlchemy ORM快速开始](https://docs.sqlalchemy.org/en/20/orm/quickstart.html)
 - [SQLAlchemy声明式模型与数据表](https://docs.sqlalchemy.org/en/20/orm/declarative_tables.html)

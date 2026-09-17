@@ -97,11 +97,6 @@ commons: dict = Depends(common_parameters)
 
 中间件的基本用法见：[[FastAPI中间件]]。
 
-## 6. 现阶段需要掌握什么
-
-依赖注入在数据库连接、用户认证和公共参数处理中经常使用，我需要理解依赖项、`Depends`和注入结果的基本流程，并能写出函数依赖。类依赖、子依赖和使用`yield`管理资源等内容，后续用到时再学习。
-
-## 7. 官方资料
+## 6. 官方资料
 
 - [FastAPI依赖项](https://fastapi.tiangolo.com/tutorial/dependencies/)
-

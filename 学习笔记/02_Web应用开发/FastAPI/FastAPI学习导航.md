@@ -16,7 +16,7 @@ FastAPI介绍 → FastAPI快速入门 → FastAPI路由 → FastAPI请求参数 
 6. [[FastAPI数据库与ORM]]：理解ORM并学习FastAPI操作数据库的整体流程。
    - 环境准备支线：[[Windows下载、安装与登录MySQL]]。
 7. [[FastAPI响应模型]]：使用`response_model`约束JSON响应的数据结构。
-8. [[FastAPI响应类型]]：重点掌握JSON、HTML和文件三种响应。
+8. [[FastAPI响应类型]]：JSON、HTML、文件以及其他响应类型的使用场景。
 9. [[FastAPI异常处理]]：使用`HTTPException`返回明确的HTTP错误。
 10. [[FastAPI中间件]]：为请求和响应添加统一的处理逻辑。
 

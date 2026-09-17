@@ -146,7 +146,7 @@ CREATE TABLE employee (
 ) COMMENT '员工表';
 ```
 
-这个例子暂时只演示表名、字段名、字段类型和注释。主键、非空和默认值等约束后续再学习。
+这个例子演示表名、字段名、字段类型和注释，不包含主键、非空和默认值等字段约束。
 
 常用的MySQL字段类型见：[[MySQL数据类型]]。
 
@@ -299,19 +299,12 @@ TRUNCATE TABLE employee;
 > [!warning]
 > `DROP TABLE`和`TRUNCATE TABLE`都会造成数据丢失，练习时也要先确认当前数据库和表名。
 
-## 5. 当前需要掌握什么
-
-- 会查询、创建、选择和谨慎删除数据库。
-- 会创建和查询数据表。
-- 会使用`ALTER TABLE`添加、修改、重命名和删除字段。
-- 能区分`DROP TABLE`删除整张表与`TRUNCATE TABLE`清空全部数据。
-
-## 6. 相关笔记
+## 5. 相关笔记
 
 - [[SQL基础语法]]
 - [[MySQL数据类型]]
 - [[数据库学习导航]]
 
-## 7. 官方资料
+## 6. 官方资料
 
 - [MySQL字符集和排序规则](https://dev.mysql.com/doc/refman/8.4/en/charset.html)

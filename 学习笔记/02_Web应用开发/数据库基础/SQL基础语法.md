@@ -66,20 +66,11 @@ SELECT * FROM employee WHERE dept_id = 1;
 
 ## 3. SQL语句的四种分类
 
-| 分类 | 全称 | 主要作用 | 常见关键字 | 学习要求 | 专题笔记 |
-| --- | --- | --- | --- | --- | --- |
-| DDL | Data Definition Language | 定义数据库、表和字段等对象 | `CREATE`、`ALTER`、`DROP`、`TRUNCATE` | **重点掌握** | [[DDL数据库与表结构操作]] |
-| DML | Data Manipulation Language | 新增、修改和删除表中的数据 | `INSERT`、`UPDATE`、`DELETE` | **重点掌握** | [[DML数据操作]] |
-| DQL | Data Query Language | 查询表中的数据 | `SELECT` | **重点掌握** | [[DQL数据查询]] |
-| DCL | Data Control Language | 管理用户和数据库访问权限 | `GRANT`、`REVOKE` | 了解即可 | [[DCL权限控制]] |
-
-表格中的笔记链接没有使用带竖线的别名写法，避免与Markdown表格的分隔符发生冲突。
-
-## 4. 当前需要掌握什么
-
-- 会按照统一格式书写SQL语句。
-- 会使用单行注释和多行注释。
-- 能区分DDL、DML、DQL和DCL的作用。
-- 现阶段重点学习DDL、DML和DQL，DCL了解用途即可。
+| 分类 | 全称 | 主要作用 | 常见关键字 | 专题笔记 |
+| --- | --- | --- | --- | --- |
+| DDL | Data Definition Language | 定义数据库、表和字段等对象 | `CREATE`、`ALTER`、`DROP`、`TRUNCATE` | [[DDL数据库与表结构操作]] |
+| DML | Data Manipulation Language | 新增、修改和删除表中的数据 | `INSERT`、`UPDATE`、`DELETE` | [[DML数据操作]] |
+| DQL | Data Query Language | 查询表中的数据 | `SELECT` | [[DQL数据查询]] |
+| DCL | Data Control Language | 管理用户和数据库访问权限 | `GRANT`、`REVOKE` | [[DCL权限控制]] |
 
 返回：[[数据库学习导航]]。
