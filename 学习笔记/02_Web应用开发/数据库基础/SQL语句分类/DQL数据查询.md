@@ -39,6 +39,17 @@ FROM 表名列表
 
 ## 3. SELECT：基本查询
 
+### 3.1 查询指定字段或全部字段
+
+查询一个或多个指定字段：
+
+```text
+SELECT 字段1, 字段2, 字段3, ...
+FROM 表名;
+```
+
+例如：
+
 ```sql
 SELECT id, name
 FROM employee;
@@ -46,7 +57,57 @@ FROM employee;
 
 这条语句会查询`employee`表中的`id`和`name`字段。
 
-`SELECT`可以与查询条件、排序、分组和表连接等语法组合，完成不同的数据查询需求。
+使用`*`可以查询表中的全部字段：
+
+```text
+SELECT *
+FROM 表名;
+```
+
+例如：
+
+```sql
+SELECT *
+FROM employee;
+```
+
+`*`书写方便，但查询结果会依赖表中现有的全部字段。只需要部分数据时，明确写出字段名更容易看出查询目的。
+
+### 3.2 设置字段别名
+
+```text
+SELECT 字段1 [AS 别名1], 字段2 [AS 别名2], ...
+FROM 表名;
+```
+
+方括号表示设置别名是可选的，实际SQL中不写方括号。别名只改变查询结果中显示的列名，不会修改数据表原来的字段名。
+
+例如：
+
+```sql
+SELECT name AS employee_name, job AS employee_job
+FROM employee;
+```
+
+在MySQL中，`AS`关键字也可以省略，但保留`AS`通常更容易看出原字段名和别名的关系。
+
+### 3.3 去除重复记录
+
+```text
+SELECT DISTINCT 字段列表
+FROM 表名;
+```
+
+例如，查询员工表中不重复的岗位：
+
+```sql
+SELECT DISTINCT job
+FROM employee;
+```
+
+当`DISTINCT`后面有多个字段时，只有这些字段的组合完全相同，才会被视为重复记录。
+
+`SELECT`还可以与查询条件、排序、分组和表连接等语法组合，完成不同的数据查询需求。
 
 ## 4. 相关笔记
 
