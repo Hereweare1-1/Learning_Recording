@@ -128,7 +128,7 @@ async def get_book(
 | `max_length` | 最大长度 | 字符串 |
 | `description` | 参数说明 | 各种类型 |
 
-> [!tip] 现阶段怎样写
+> [!tip] 推荐写法
 > 路径参数始终是必填的。我优先使用官方推荐的`Annotated[int, Path(...)]`写法；在旧代码中也可能看到`book_id: int = Path(...)`。
 
 ## 3. 查询参数
@@ -197,7 +197,7 @@ http://127.0.0.1:8000/books?keyword=Python&skip=0&limit=10
 | `page: int = 1` | 非必填，不传时使用`1` |
 | `keyword: str | None = None` | 非必填，不传时使用`None` |
 
-> [!tip] 现阶段怎样写
+> [!tip] 推荐写法
 > 简单查询参数直接使用Python类型注解；需要额外校验时，优先使用官方推荐的`Annotated[类型, Query(...)]`写法。
 
 ## 4. 请求体参数

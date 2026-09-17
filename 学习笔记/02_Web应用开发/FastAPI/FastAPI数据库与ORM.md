@@ -181,7 +181,7 @@ app = FastAPI(lifespan=lifespan)
 - `lifespan`中`yield`之前的代码在应用启动时执行，之后的代码在应用关闭时执行。
 - `async_engine.dispose()`：应用关闭时释放连接池资源。
 
-`create_all()`适合学习阶段首次建表，但不会自动修改已经存在的表结构。正式项目通常使用数据库迁移工具管理表结构变化，这部分后续再学习。
+`create_all()`适合在简单项目中首次建表，但不会自动修改已经存在的表结构。需要持续管理表结构变化的项目通常使用数据库迁移工具。
 
 图片中的`@app.on_event("startup")`属于旧的事件写法。当前FastAPI推荐使用`lifespan`统一处理启动和关闭逻辑。
 

@@ -8,7 +8,7 @@
 FastAPI介绍 → FastAPI快速入门 → FastAPI路由 → FastAPI请求参数 → FastAPI依赖注入 → FastAPI数据库与ORM → FastAPI响应模型 → FastAPI响应类型 → FastAPI异常处理 → FastAPI中间件
 ```
 
-1. [[FastAPI介绍]]：了解FastAPI是什么、主要特点，以及我为什么优先学习它。
+1. [[FastAPI介绍]]：FastAPI的主要特点和在智能应用开发中的适用场景。
 2. [[FastAPI快速入门]]：创建FastAPI实例，编写最小程序并运行服务。
 3. [[FastAPI路由]]：理解路由、装饰器、请求方法、请求路径和处理函数。
 4. [[FastAPI请求参数]]：学习路径参数、查询参数、`Path()`、`Query()`和请求体。
@@ -24,7 +24,3 @@ FastAPI介绍 → FastAPI快速入门 → FastAPI路由 → FastAPI请求参数 
 
 - [[Python Web框架对比]]：比较FastAPI、Flask和Django的定位与适用场景。
 - [[闭包与装饰器#六、FastAPI中的装饰器|FastAPI中的装饰器]]：补充理解`@app.get()`等写法。
-
-## 3. 后续扩展规则
-
-以后学习到认证和部署等独立主题时，我再建立对应笔记并加入这里。暂时不提前创建空白笔记，避免目录变得杂乱。
