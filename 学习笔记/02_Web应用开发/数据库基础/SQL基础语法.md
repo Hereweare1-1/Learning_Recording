@@ -70,7 +70,7 @@ SELECT * FROM employee WHERE dept_id = 1;
 | --- | --- | --- | --- | --- |
 | DDL | Data Definition Language | 定义数据库、表和字段等对象 | `CREATE`、`ALTER`、`DROP`、`TRUNCATE` | [[DDL数据库与表结构操作]] |
 | DML | Data Manipulation Language | 新增、修改和删除表中的数据 | `INSERT`、`UPDATE`、`DELETE` | [[DML数据操作]] |
-| DQL | Data Query Language | 查询表中的数据 | `SELECT` | [[DQL数据查询]] |
+| DQL | Data Query Language | 查询表中的数据 | `SELECT` | [[DQL基本查询]] |
 | DCL | Data Control Language | 管理用户和数据库访问权限 | `GRANT`、`REVOKE` | [[DCL权限控制]] |
 
 返回：[[数据库学习导航]]。
