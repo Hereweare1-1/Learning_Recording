@@ -4,11 +4,11 @@ DML（Data Manipulation Language，数据操作语言）用于新增、修改和
 
 ## 1. 语句汇总
 
-| 作用   | 基本语句                                  | 当前学习状态 |
-| ---- | ------------------------------------- | ------ |
-| 新增数据 | `INSERT INTO 表名 (字段列表) VALUES (值列表);` | 正在学习   |
-| 修改数据 | `UPDATE 表名 SET 字段 = 值 WHERE 条件;`      | 后续学习   |
-| 删除数据 | `DELETE FROM 表名 WHERE 条件;`            | 后续学习   |
+| 作用 | 基本语句 |
+| --- | --- |
+| 新增数据 | `INSERT INTO 表名 (字段列表) VALUES (值列表);` |
+| 修改数据 | `UPDATE 表名 SET 字段 = 值 WHERE 条件;` |
+| 删除数据 | `DELETE FROM 表名 WHERE 条件;` |
 
 ## 2. INSERT：新增数据
 
