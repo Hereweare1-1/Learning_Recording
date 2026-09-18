@@ -61,7 +61,30 @@ MySQL从`8.0.16`开始真正创建并检查`CHECK`约束；当前使用的MySQL 
 
 外键字段与被引用字段需要使用相互兼容的数据类型。MySQL还会为外键和被引用键使用索引，以便检查关联关系。
 
-## 4. 添加约束的时机
+## 4. AUTO_INCREMENT：自动递增
+
+`AUTO_INCREMENT`表示自动递增，它是字段属性，不属于约束。插入数据时如果不指定该字段的值，MySQL会自动生成一个递增的整数。
+
+它通常与整数类型的主键一起使用：
+
+```sql
+CREATE TABLE user (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL
+);
+```
+
+插入数据时可以省略`id`：
+
+```sql
+INSERT INTO user (username) VALUES ('小明');
+```
+
+MySQL会自动为`id`赋值，默认从`1`开始递增。一张表只能有一个`AUTO_INCREMENT`字段，并且该字段必须是索引的一部分。
+
+删除记录、插入失败或事务回滚都可能使自动生成的编号出现空缺，因此不能把`AUTO_INCREMENT`理解为永远连续的编号。
+
+## 5. 添加约束的时机
 
 约束通常在以下两种操作中添加：
 
@@ -70,13 +93,13 @@ MySQL从`8.0.16`开始真正创建并检查`CHECK`约束；当前使用的MySQL 
 
 约束属于表结构的一部分。添加约束前，表中已经存在的数据也必须满足该约束，否则操作可能失败。
 
-## 5. 相关笔记
+## 6. 相关笔记
 
 - [[DDL数据库与表结构操作]]
 - [[MySQL数据类型]]
 - [[数据库学习导航]]
 
-## 6. 官方资料
+## 7. 官方资料
 
 - [MySQL 8.4 CREATE TABLE语句](https://dev.mysql.com/doc/refman/8.4/en/create-table.html)
 - [MySQL 8.4 CHECK约束](https://dev.mysql.com/doc/refman/8.4/en/create-table-check-constraints.html)
