@@ -303,6 +303,7 @@ TRUNCATE TABLE employee;
 
 - [[SQL基础语法]]
 - [[MySQL数据类型]]
+- [[MySQL约束]]
 - [[数据库学习导航]]
 
 ## 6. 官方资料
