@@ -149,5 +149,6 @@ FROM employee;
 - [[MySQL字符串函数]]
 - [[MySQL数值函数]]
 - [[MySQL日期函数]]
+- [[MySQL流程函数]]
 - [[SQL基础语法]]
 - [[数据库学习导航]]

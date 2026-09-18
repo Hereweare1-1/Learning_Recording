@@ -99,5 +99,6 @@ SELECT SUBSTRING('abcdef', 2, 3);
 
 - [[MySQL数值函数]]
 - [[MySQL日期函数]]
+- [[MySQL流程函数]]
 - [[DQL基本查询]]
 - [[数据库学习导航]]
