@@ -118,12 +118,12 @@ DROP FOREIGN KEY fk_employee_department;
 
 可以使用`ON UPDATE`和`ON DELETE`分别指定父表记录被更新或删除时，如何处理子表中的关联记录。
 
-| 处理方式 | 作用 |
-| --- | --- |
-| `RESTRICT` | 子表存在关联记录时，拒绝更新或删除父表记录 |
-| `NO ACTION` | 在InnoDB中与`RESTRICT`相同 |
-| `CASCADE` | 父表字段更新或记录删除时，自动更新或删除子表中的关联数据 |
-| `SET NULL` | 父表字段更新或记录删除时，将子表的外键值设为`NULL` |
+| 处理方式          | 作用                              |
+| ------------- | ------------------------------- |
+| `RESTRICT`    | 子表存在关联记录时，拒绝更新或删除父表记录           |
+| `NO ACTION`   | 在InnoDB中与`RESTRICT`相同           |
+| `CASCADE`     | 父表字段更新或记录删除时，自动更新或删除子表中的关联数据    |
+| `SET NULL`    | 父表字段更新或记录删除时，将子表的外键值设为`NULL`    |
 | `SET DEFAULT` | MySQL能够识别该语法，但InnoDB不支持，会拒绝创建外键 |
 
 如果没有写`ON UPDATE`或`ON DELETE`，MySQL默认使用`NO ACTION`。在InnoDB中，它会在存在关联记录时拒绝更新或删除父表数据。
