@@ -59,7 +59,89 @@ MySQL从`8.0.16`开始真正创建并检查`CHECK`约束；当前使用的MySQL 
 
 外键在子表字段和父表字段之间建立引用关系，用于防止子表保存父表中不存在的关联值，从而保持两张表的数据一致性。
 
-外键字段与被引用字段需要使用相互兼容的数据类型。MySQL还会为外键和被引用键使用索引，以便检查关联关系。
+例如，部门表保存部门信息，员工表中的`department_id`保存员工所属部门：
+
+- **父表**：保存被引用数据的表，例如部门表`department`。
+- **子表**：通过外键引用父表的表，例如员工表`employee`。
+- **外键字段**：子表中引用父表字段的字段，例如`employee.department_id`。
+
+建立外键后，子表的外键值必须满足以下条件之一：
+
+- 该值能够在父表被引用字段中找到。
+- 外键字段允许为`NULL`，并且该值是`NULL`。
+
+仅仅让两个字段保存相同的编号，并没有建立数据库层面的外键关系。必须使用`FOREIGN KEY`和`REFERENCES`定义外键，MySQL才能检查关联数据的一致性。
+
+#### 创建表时添加外键
+
+```sql
+CREATE TABLE department (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE employee (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    department_id INT,
+    CONSTRAINT fk_employee_department
+        FOREIGN KEY (department_id)
+        REFERENCES department(id)
+);
+```
+
+`CONSTRAINT fk_employee_department`用于指定外键名称。外键名称可以省略，由MySQL自动生成，但主动命名更方便以后删除和排查问题。
+
+#### 为已有表添加外键
+
+如果数据表创建时还没有定义该外键，可以使用以下语句添加；不要与上面的建表示例重复执行。
+
+```sql
+ALTER TABLE employee
+ADD CONSTRAINT fk_employee_department
+FOREIGN KEY (department_id)
+REFERENCES department(id);
+```
+
+添加外键前，子表中已经存在的外键值也必须能在父表中找到，否则添加操作会失败。
+
+#### 删除外键
+
+```sql
+ALTER TABLE employee
+DROP FOREIGN KEY fk_employee_department;
+```
+
+删除外键约束不会删除字段，也不会删除字段中已经保存的数据。
+
+#### 父表数据变化时的处理方式
+
+可以使用`ON UPDATE`和`ON DELETE`分别指定父表记录被更新或删除时，如何处理子表中的关联记录。
+
+| 处理方式 | 作用 |
+| --- | --- |
+| `RESTRICT` | 子表存在关联记录时，拒绝更新或删除父表记录 |
+| `NO ACTION` | 在InnoDB中与`RESTRICT`相同 |
+| `CASCADE` | 父表字段更新或记录删除时，自动更新或删除子表中的关联数据 |
+| `SET NULL` | 父表字段更新或记录删除时，将子表的外键值设为`NULL` |
+| `SET DEFAULT` | MySQL能够识别该语法，但InnoDB不支持，会拒绝创建外键 |
+
+如果没有写`ON UPDATE`或`ON DELETE`，MySQL默认使用`NO ACTION`。在InnoDB中，它会在存在关联记录时拒绝更新或删除父表数据。
+
+下面的外键会在父表编号更新时同步更新子表外键，在删除仍被员工引用的部门时拒绝删除：
+
+```sql
+ALTER TABLE employee
+ADD CONSTRAINT fk_employee_department
+FOREIGN KEY (department_id)
+REFERENCES department(id)
+ON UPDATE CASCADE
+ON DELETE RESTRICT;
+```
+
+使用`SET NULL`时，子表的外键字段必须允许保存`NULL`，不能同时设置`NOT NULL`。
+
+外键字段与被引用字段需要使用相互兼容的数据类型。对于整数类型，长度和是否使用`UNSIGNED`等属性需要保持一致。父表和子表还需要使用相同且支持外键的存储引擎，例如InnoDB。MySQL会使用索引检查外键关系；如果子表外键字段没有合适的索引，MySQL会自动创建。
 
 ## 4. AUTO_INCREMENT：自动递增
 
