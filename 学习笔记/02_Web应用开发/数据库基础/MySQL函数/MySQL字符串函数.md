@@ -76,8 +76,8 @@ SUBSTRING(str, start, len)
 - `start`：开始截取的位置。
 - `len`：需要截取的字符数量。
 
-> [!important]
-> MySQL的`SUBSTRING()`字符串位置从`1`开始：`1`表示第一个字符。它与Python字符串从索引`0`开始不同。
+> [!注意]
+> MySQL的`SUBSTRING()`字符串位置从`1`开始
 
 例如，从第`1`个字符开始截取`3`个字符：
 
