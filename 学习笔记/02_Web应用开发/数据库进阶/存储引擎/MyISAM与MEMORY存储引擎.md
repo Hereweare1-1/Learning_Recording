@@ -107,8 +107,8 @@ ON city_cache (city_name) USING BTREE;
 
 ## 5. 相关笔记
 
+- [[存储引擎选择]]
 - [[InnoDB存储引擎]]
 - [[存储引擎简介]]
 - [[MySQL体系结构]]
 - [[数据库进阶学习导航]]
-
