@@ -114,6 +114,8 @@ mysql+aiomysql://用户名:密码@localhost:3306/fastapi_test?charset=utf8mb4
 
 **第二步：定义模型类**
 
+下面的模型同时使用了Python类型、SQLAlchemy类型以及数据库字段配置。阅读前可以先查看：[[SQLAlchemy数据类型与映射]]。
+
 ```python
 from datetime import datetime
 
