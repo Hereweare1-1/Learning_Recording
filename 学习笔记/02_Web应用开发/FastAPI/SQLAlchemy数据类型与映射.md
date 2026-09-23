@@ -95,19 +95,19 @@ MySQL自身的数据类型见：[[MySQL数据类型]]。
 
 ## 4. 常用类型对应关系
 
-| Python类型 | SQLAlchemy类型 | 常见MySQL字段类型 |
-| --- | --- | --- |
-| `int` | `Integer` | `INT` |
-| `str` | `String(100)` | `VARCHAR(100)` |
-| `float` | `Float` | `FLOAT` |
-| `bool` | `Boolean` | `BOOLEAN`，在MySQL中等价于`TINYINT(1)` |
-| `datetime` | `DateTime` | `DATETIME` |
-| `date` | `Date` | `DATE` |
-| `time` | `Time` | `TIME` |
-| `bytes` | `LargeBinary` | `BLOB` |
-| `Decimal` | `Numeric(10, 2)` | `DECIMAL(10, 2)` |
-| `dict`、`list` | `JSON` | `JSON` |
-| `str` | `Text` | `TEXT` |
+| Python类型      | SQLAlchemy类型     | 常见MySQL字段类型                      |
+| ------------- | ---------------- | -------------------------------- |
+| `int`         | `Integer`        | `INT`                            |
+| `str`         | `String(100)`    | `VARCHAR(100)`                   |
+| `float`       | `Float`          | `FLOAT`                          |
+| `bool`        | `Boolean`        | `BOOLEAN`，在MySQL中等价于`TINYINT(1)` |
+| `datetime`    | `DateTime`       | `DATETIME`                       |
+| `date`        | `Date`           | `DATE`                           |
+| `time`        | `Time`           | `TIME`                           |
+| `bytes`       | `LargeBinary`    | `BLOB`                           |
+| `Decimal`     | `Numeric(10, 2)` | `DECIMAL(10, 2)`                 |
+| `dict`、`list` | `JSON`           | `JSON`                           |
+| `str`         | `Text`           | `TEXT`                           |
 
 表中的SQLAlchemy类型是通用写法。最终生成的字段类型会受到数据库种类和字段配置影响。
 
